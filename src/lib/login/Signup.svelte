@@ -109,7 +109,7 @@
 		height: 35px;
 		width: 300px;
 		border-radius: 5px;
-		border: 0.5px solid black;
+		border: 0.5px solid #373435;
 		padding-left: 5px;
 	}
 
@@ -145,7 +145,7 @@
 		margin-top: 12px;
 		border: none;
 		border-radius: 5px;
-		background-color: black;
+		background-color: #373435;
 		color: white;
 		font-size: 16px;
 		cursor: pointer;

@@ -77,7 +77,7 @@
 		margin-top: 12px;
 		border: none;
 		border-radius: 5px;
-		background-color: black;
+		background-color: #373435;
 		color: white;
 		font-size: 16px;
 		cursor: pointer;

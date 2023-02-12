@@ -1,21 +1,25 @@
 <script>
-	import { goto } from '$app/navigation';
-	import { signOut } from 'firebase/auth';
-	import { auth } from '../fb';
-
-	const signOutUser = () => {
-		signOut(auth)
-			.then(() => {
-				goto('/');
-			})
-			.catch((err) => console.log(err));
-	};
+	import NavBar from '$lib/navbar/NavBar.svelte';
 </script>
 
-<main>je suis la home <button on:click={signOutUser}>deco</button></main>
+<main>
+	<NavBar />
+	<div>
+		<h2>Accueil</h2>
+	</div>
+</main>
 
 <style>
 	main {
 		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	div {
+		margin: 50px 0 0 250px;
+		min-height: 100vh;
+		width: 1100px;
 	}
 </style>

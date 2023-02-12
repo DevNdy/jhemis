@@ -72,6 +72,6 @@
 		bottom: 5px;
 		left: 20px;
 		font-size: 14px;
-		color: gray;
+		color: rgb(108, 108, 108);
 	}
 </style>
