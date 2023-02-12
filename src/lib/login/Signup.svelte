@@ -1,19 +1,60 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { createUserWithEmailAndPassword } from 'firebase/auth';
+	import { auth, db } from '../../routes/fb';
+	import { doc, setDoc } from 'firebase/firestore';
+
+	const date = new Date();
+	const options: {} = { weekday: 'long', year: 'numeric', month: 'long', day: '2-digit' };
+	const dateOfDay = date.toLocaleDateString('fr-FR', options);
+
+	let firstName: string = '';
+	let lastName: string = '';
+	let email: string = '';
+	let password: string = '';
+	let confirmPassword: string = '';
+	let checkCondi: boolean = false;
+
+	const submitSignUp = async () => {
+		try {
+			await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+				const user = userCredential.user;
+				localStorage.setItem('uid', user.uid);
+				setDoc(doc(db, 'Users', user.uid), {
+					date: dateOfDay,
+					email: email,
+					firstName: firstName,
+					lastName: lastName,
+					id: user.uid,
+					avatar: '',
+					description: ''
+				});
+				goto('/home');
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 </script>
 
-<form>
-	<label for="email">Email :</label>
-	<input type="email" placeholder="Entrer votre email" id="email" />
+<form on:submit|preventDefault={submitSignUp}>
 	<label for="firstname">Prénom :</label>
-	<input type="text" placeholder="Entrer votre prénom" id="firstname" />
+	<input type="text" placeholder="Entrer votre prénom" id="firstname" bind:value={firstName} />
 	<label for="lastname">Nom :</label>
-	<input type="text" placeholder="Entrer votre nom" id="lastname" />
+	<input type="text" placeholder="Entrer votre nom" id="lastname" bind:value={lastName} />
+	<label for="email">Email :</label>
+	<input type="email" placeholder="Entrer votre email" id="email" bind:value={email} />
 	<label for="password">Mot de passe :</label>
-	<input type="password" placeholder="Nouveau mot de passe" id="password" />
-	<label for="password">Confirmation mot de passe :</label>
-	<input type="password" placeholder="Confirmer mot de passe" id="password" />
+	<input type="password" placeholder="Nouveau mot de passe" id="password" bind:value={password} />
+	<label for="confirmpassword">Confirmation mot de passe :</label>
+	<input
+		type="password"
+		placeholder="Confirmer mot de passe"
+		id="confirmpassword"
+		bind:value={confirmPassword}
+	/>
 	<div>
-		<input type="checkbox" class="check" id="conditions" />
+		<input type="checkbox" class="check" id="conditions" bind:value={checkCondi} />
 		<label for="conditions" class="condi"
 			>En cochant j'accepte <span class="cvg">les condtions générales</span></label
 		>
@@ -24,7 +65,7 @@
 
 <style>
 	form {
-		margin-top: 60px;
+		margin-top: 30px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;

@@ -13,6 +13,7 @@
 		{:else}
 			<Signup on:click={() => (signInOrSignUp = true)} />
 		{/if}
+		<p class="bottom">© 2023 Jhémis par @DevNdy</p>
 	</div>
 	<img
 		src="https://images.pexels.com/photos/6077123/pexels-photo-6077123.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -52,5 +53,13 @@
 	img {
 		height: 100vh;
 		filter: grayscale(60%);
+	}
+
+	.bottom {
+		position: absolute;
+		bottom: 5px;
+		left: 20px;
+		font-size: 14px;
+		color: gray;
 	}
 </style>

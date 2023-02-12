@@ -1,11 +1,34 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { signInWithEmailAndPassword } from 'firebase/auth';
+	import { auth } from '../../routes/fb';
+
+	let email: string = '';
+	let password: string = '';
+
+	const submitSignIn = async () => {
+		try {
+			await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+				const user = userCredential.user;
+				localStorage.setItem('uid', user.uid);
+				goto('/home');
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 </script>
 
-<form>
+<form on:submit|preventDefault={submitSignIn}>
 	<label for="email">Email :</label>
-	<input type="email" placeholder="Entrer votre email" id="email" />
+	<input type="email" placeholder="Entrer votre email" id="email" bind:value={email} />
 	<label for="password">Mot de passe :</label>
-	<input type="password" placeholder="Entrer votre mot de passe" id="password" />
+	<input
+		type="password"
+		placeholder="Entrer votre mot de passe"
+		id="password"
+		bind:value={password}
+	/>
 	<a href="/">mot de passe oublié?</a>
 	<button>Se connecter</button>
 	<p>Pas encore inscrit? <span on:click on:keypress>Créer un compte</span></p>
@@ -13,7 +36,7 @@
 
 <style>
 	form {
-		margin-top: 100px;
+		margin-top: 140px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
