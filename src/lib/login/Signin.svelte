@@ -5,6 +5,7 @@
 
 	let email: string = '';
 	let password: string = '';
+	let messError: string = '';
 
 	const submitSignIn = async () => {
 		try {
@@ -15,6 +16,7 @@
 			});
 		} catch (err) {
 			console.log(err);
+			messError = 'Erreur email ou mot de passe';
 		}
 	};
 </script>
@@ -31,6 +33,7 @@
 	/>
 	<a href="/">mot de passe oublié?</a>
 	<button>Se connecter</button>
+	<h5>{messError}</h5>
 	<p>Pas encore inscrit? <span on:click on:keypress>Créer un compte</span></p>
 </form>
 
@@ -78,6 +81,14 @@
 
 	button:hover {
 		opacity: 0.7;
+	}
+
+	h5 {
+		width: 300px;
+		text-align: center;
+		color: red;
+		font-weight: 400;
+		margin-top: 10px;
 	}
 
 	p {

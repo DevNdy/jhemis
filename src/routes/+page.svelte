@@ -2,16 +2,16 @@
 	import Signin from '$lib/login/Signin.svelte';
 	import Signup from '$lib/login/Signup.svelte';
 
-	let signInOrSignUp: boolean = false;
+	let signInOrSignUp = false;
 </script>
 
 <main>
 	<div>
 		<h1>Bienvenue sur Jhémis <span>le réseau social de la justice</span></h1>
 		{#if signInOrSignUp}
-			<Signin on:click={() => (signInOrSignUp = false)} />
+			<Signup on:click={() => (signInOrSignUp = false)} />
 		{:else}
-			<Signup on:click={() => (signInOrSignUp = true)} />
+			<Signin on:click={() => (signInOrSignUp = true)} />
 		{/if}
 		<p class="bottom">© 2023 Jhémis par @DevNdy</p>
 	</div>
