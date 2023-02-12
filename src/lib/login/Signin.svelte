@@ -58,6 +58,10 @@
 		padding-left: 5px;
 	}
 
+	input:focus {
+		outline-color: #bf9b58;
+	}
+
 	a {
 		width: 300px;
 		text-decoration: none;
@@ -98,7 +102,7 @@
 	}
 
 	span {
-		color: black;
+		color: #bf9b58;
 		cursor: pointer;
 		text-decoration: underline;
 	}

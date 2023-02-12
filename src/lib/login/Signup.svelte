@@ -113,6 +113,10 @@
 		padding-left: 5px;
 	}
 
+	input:focus {
+		outline-color: #bf9b58;
+	}
+
 	div {
 		display: flex;
 		flex-direction: row;
@@ -123,6 +127,7 @@
 		width: 15px;
 		height: 15px;
 		margin-right: 10px;
+		accent-color: #aa7f2e;
 	}
 
 	.condi {
@@ -159,13 +164,13 @@
 	}
 
 	p {
-		margin: 40px 0 0 25px;
+		margin: 40px 0 0 60px;
 		color: gray;
 		font-size: 15px;
 	}
 
 	span {
-		color: black;
+		color: #bf9b58;
 		cursor: pointer;
 		text-decoration: underline;
 	}
