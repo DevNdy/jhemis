@@ -1,1 +1,71 @@
-<form />
+<script lang="ts">
+</script>
+
+<form>
+	<label for="email">Email :</label>
+	<input type="email" placeholder="Entrer votre email" id="email" />
+	<label for="password">Mot de passe :</label>
+	<input type="password" placeholder="Entrer votre mot de passe" id="password" />
+	<a href="/">mot de passe oublié?</a>
+	<button>Se connecter</button>
+	<p>Pas encore inscrit? <span on:click on:keypress>Créer un compte</span></p>
+</form>
+
+<style>
+	form {
+		margin-top: 100px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	label {
+		margin-top: 12px;
+		opacity: 0.7;
+	}
+
+	input {
+		height: 35px;
+		width: 300px;
+		border-radius: 5px;
+		border: 0.5px solid black;
+		padding-left: 5px;
+	}
+
+	a {
+		width: 300px;
+		text-decoration: none;
+		font-size: 12px;
+		text-align: end;
+		color: gray;
+		margin-top: 3px;
+	}
+
+	button {
+		height: 35px;
+		width: 308px;
+		margin-top: 12px;
+		border: none;
+		border-radius: 5px;
+		background-color: black;
+		color: white;
+		font-size: 16px;
+		cursor: pointer;
+	}
+
+	button:hover {
+		opacity: 0.7;
+	}
+
+	p {
+		margin: 40px 0 0 25px;
+		color: gray;
+		font-size: 15px;
+	}
+
+	span {
+		color: black;
+		cursor: pointer;
+		text-decoration: underline;
+	}
+</style>
