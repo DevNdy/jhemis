@@ -1,18 +1,12 @@
 <script lang="ts">
 	import { doc, setDoc } from 'firebase/firestore';
 	import { db } from '../../routes/fb';
-	import { authStore, usersList } from '../../stores/dataUsers';
+	import { authStore, usersList, userName } from '../../stores/dataUsers';
 
 	export let onClickCloseWindow: () => void;
 
 	let description: string = '';
 	let urlImg: string = '';
-	let name = '';
-
-	//récup name user
-	$: $usersList.filter((e: any) =>
-		e.id === $authStore.uid ? (name = e.firstName + ' ' + e.lastName) : ''
-	);
 
 	const generateId = Math.floor((1 + Math.random()) * 0x10000)
 		.toString(16)
@@ -27,7 +21,7 @@
 				emailUserl: $authStore.email,
 				description: description,
 				img: urlImg,
-				userName: name
+				userName: $userName
 			});
 			description = '';
 			urlImg = '';

@@ -5,3 +5,4 @@ export let authStore = writable({
 	email: null,
 	uid: null
 });
+export let userName = writable('');

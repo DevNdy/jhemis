@@ -1,8 +1,14 @@
-<script>
+<script lang="ts">
 	import PostWindow from '$lib/home/PostWindow.svelte';
 	import NavBar from '$lib/navbar/NavBar.svelte';
+	import { authStore, usersList, userName } from '../../stores/dataUsers';
 
 	let newPost = false;
+
+	//récup userName
+	$: $usersList.filter((e: any) =>
+		e.id === $authStore.uid ? userName.set(e.firstName + ' ' + e.lastName) : ''
+	);
 </script>
 
 <main>
