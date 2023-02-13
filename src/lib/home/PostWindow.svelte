@@ -1,13 +1,46 @@
 <script lang="ts">
+	import { doc, setDoc } from 'firebase/firestore';
+	import { db } from '../../routes/fb';
 	import { authStore, usersList } from '../../stores/dataUsers';
 
 	export let onClickCloseWindow: () => void;
+
+	let description: string = '';
+	let urlImg: string = '';
+	let name = '';
+
+	//récup name user
+	$: $usersList.filter((e: any) =>
+		e.id === $authStore.uid ? (name = e.firstName + ' ' + e.lastName) : ''
+	);
+
+	const generateId = Math.floor((1 + Math.random()) * 0x10000)
+		.toString(16)
+		.substring(1);
+
+	const submitPost = async () => {
+		try {
+			await setDoc(doc(db, 'Posts', generateId), {
+				date: Date.now(),
+				idPost: generateId,
+				idUser: $authStore.uid,
+				emailUserl: $authStore.email,
+				description: description,
+				img: urlImg,
+				userName: name
+			});
+			description = '';
+			urlImg = '';
+		} catch (err) {
+			console.log(err);
+		}
+	};
 </script>
 
-<div class="window">
+<form class="window" on:submit|preventDefault={submitPost}>
 	<div class="top">
 		<h3>Créer un post</h3>
-		<button on:click={onClickCloseWindow}>X</button>
+		<i on:click={onClickCloseWindow} on:keypress class="fa-solid fa-xmark close" />
 	</div>
 	<div class="user">
 		{#each $usersList as items}
@@ -17,13 +50,21 @@
 			{/if}
 		{/each}
 	</div>
-	<textarea placeholder="Que voulez vous partager ?" id="" cols="30" rows="6" />
-	<input type="text" placeholder="Url de votre image..." />
-</div>
+	<textarea
+		placeholder="Que voulez vous partager ?"
+		id=""
+		cols="30"
+		rows="6"
+		bind:value={description}
+	/>
+	<input type="text" placeholder="Url de votre image..." bind:value={urlImg} />
+	<div class="btn">
+		<button class="btnPost">Publier</button>
+	</div>
+</form>
 
 <style lang="scss">
 	.window {
-		height: 400px;
 		width: 600px;
 		background-color: white;
 		border: 1px solid #373435;
@@ -49,14 +90,18 @@
 			font-weight: 400;
 		}
 
-		button {
+		.close {
 			margin: 10px;
 			width: 28px;
 			height: 28px;
 			border-radius: 5px;
-			border: none;
+			font-size: 20px;
 			background-color: #373435;
 			color: white;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 			cursor: pointer;
 
 			&:hover {
@@ -98,5 +143,30 @@
 		padding-left: 5px;
 		border-radius: 8px;
 		border: 0.5px solid gray;
+
+		&:focus {
+			outline-color: #bf9b58;
+		}
+	}
+
+	.btn {
+		width: 100%;
+		text-align: end;
+
+		.btnPost {
+			width: 100px;
+			margin: 10px;
+			padding: 3px 10px 3px 10px;
+			background-color: #373435;
+			color: white;
+			font-size: 15px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+
+			&:hover {
+				opacity: 0.8;
+			}
+		}
 	}
 </style>
