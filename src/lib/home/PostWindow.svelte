@@ -8,23 +8,31 @@
 	let description: string = '';
 	let urlImg: string = '';
 
+	//id
 	const generateId = Math.floor((1 + Math.random()) * 0x10000)
 		.toString(16)
 		.substring(1);
 
+	const date = new Date();
+	const options: {} = { weekday: 'short', year: '2-digit', month: 'short', day: '2-digit' };
+	const dateOfDay = date.toLocaleDateString('fr-FR', options);
+
 	const submitPost = async () => {
 		try {
 			await setDoc(doc(db, 'Posts', generateId), {
-				date: Date.now(),
+				date: dateOfDay,
+				time: Date.now(),
 				idPost: generateId,
 				idUser: $authStore.uid,
 				emailUserl: $authStore.email,
 				description: description,
 				img: urlImg,
-				userName: $userName
+				userName: $userName.name,
+				avatar: $userName.avatar
 			});
 			description = '';
 			urlImg = '';
+			window.location.reload();
 		} catch (err) {
 			console.log(err);
 		}

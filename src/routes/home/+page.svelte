@@ -1,14 +1,38 @@
 <script lang="ts">
+	import ModalPost from '$lib/home/ModalPost.svelte';
 	import PostWindow from '$lib/home/PostWindow.svelte';
 	import NavBar from '$lib/navbar/NavBar.svelte';
-	import { authStore, usersList, userName } from '../../stores/dataUsers';
+	import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+	import { onMount } from 'svelte';
+	import { authStore, usersList, userName, postsList } from '../../stores/dataUsers';
+	import { db } from '../fb';
 
 	let newPost = false;
+	let posts: any = [];
 
-	//récup userName
+	//récup userName & avatar
 	$: $usersList.filter((e: any) =>
-		e.id === $authStore.uid ? userName.set(e.firstName + ' ' + e.lastName) : ''
+		e.id === $authStore.uid
+			? userName.set({
+					name: e.firstName + ' ' + e.lastName,
+					avatar: e.avatar
+			  })
+			: ''
 	);
+
+	onMount(async () => {
+		try {
+			const q = query(collection(db, 'Posts'), orderBy('time', 'desc'));
+
+			const querySnapshot = await getDocs(q);
+			querySnapshot.forEach((doc) => {
+				posts = [...posts, doc.data()];
+				postsList.set(posts);
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	});
 </script>
 
 <main>
@@ -20,6 +44,16 @@
 				><i class="fa-solid fa-feather" />Écrire un post</button
 			>
 		</div>
+		{#each $postsList as item}
+			<ModalPost
+				avatar={item.avatar}
+				nameUser={item.userName}
+				date={item.date}
+				description={item.description}
+				img={item.img}
+				idUser={item.idUser}
+			/>
+		{/each}
 		{#if newPost === true}
 			<PostWindow onClickCloseWindow={() => (newPost = false)} />
 			<div class="filterPage" />
