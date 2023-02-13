@@ -18,8 +18,9 @@
 	}
 
 	div {
-		margin: 50px 0 0 250px;
+		margin: 40px 0 0 250px;
 		min-height: 100vh;
 		width: 1100px;
+		background-color: gray;
 	}
 </style>

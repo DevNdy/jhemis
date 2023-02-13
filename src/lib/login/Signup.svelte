@@ -32,7 +32,8 @@
 						firstName: firstName,
 						lastName: lastName,
 						id: user.uid,
-						avatar: '',
+						avatar:
+							'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Pic-Clip-Art-Background.png',
 						description: ''
 					});
 					messageError = '';

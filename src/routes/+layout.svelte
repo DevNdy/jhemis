@@ -11,7 +11,7 @@
 		loading = true;
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				console.log('welcome to SV-Socials');
+				console.log('welcome to Jhémis');
 			} else {
 				goto('/');
 			}
