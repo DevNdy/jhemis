@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
 	import Loader from '$lib/ui-reusable/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { getAuth, onAuthStateChanged } from 'firebase/auth';
 	import { goto } from '$app/navigation';
 	import { auth } from './fb';
+	import { authStore } from '../stores/dataUsers';
 
 	let loading = false;
 
@@ -12,6 +13,9 @@
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				console.log('welcome to Jhémis');
+				authStore.update((curr: any) => {
+					return { ...curr, email: user.email, uid: user.uid };
+				});
 			} else {
 				goto('/');
 			}

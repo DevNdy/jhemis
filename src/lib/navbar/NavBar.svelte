@@ -2,10 +2,13 @@
 	import { goto } from '$app/navigation';
 	import { signOut } from 'firebase/auth';
 	import { collection, getDocs, query } from 'firebase/firestore';
+	import { onMount } from 'svelte';
 	import { auth, db } from '../../routes/fb';
+	import { authStore } from '../../stores/dataUsers';
 
 	let users: any = [];
-	let userId = localStorage.getItem('uid');
+
+	let email;
 
 	const signOutUser = () => {
 		signOut(auth)
@@ -15,7 +18,7 @@
 			.catch((err) => console.log(err));
 	};
 
-	const dataUsers = async () => {
+	onMount(async () => {
 		try {
 			const q = query(collection(db, 'Users'));
 
@@ -23,14 +26,10 @@
 			querySnapshot.forEach((doc) => {
 				users = [...users, doc.data()];
 			});
-
-			console.log(users);
 		} catch (err) {
 			console.log(err);
 		}
-	};
-
-	$: dataUsers();
+	});
 </script>
 
 <header>
@@ -40,7 +39,7 @@
 	</div>
 
 	{#each users as item}
-		{#if item.id === userId}
+		{#if item.id === $authStore.uid}
 			<div class="profil">
 				<img class="avatar" src={item.avatar} alt="avatar" />
 				<h3>{item.firstName}</h3>
