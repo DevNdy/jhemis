@@ -4,11 +4,9 @@
 	import { collection, getDocs, query } from 'firebase/firestore';
 	import { onMount } from 'svelte';
 	import { auth, db } from '../../routes/fb';
-	import { authStore } from '../../stores/dataUsers';
+	import { authStore, usersList } from '../../stores/dataUsers';
 
 	let users: any = [];
-
-	let email;
 
 	const signOutUser = () => {
 		signOut(auth)
@@ -25,6 +23,7 @@
 			const querySnapshot = await getDocs(q);
 			querySnapshot.forEach((doc) => {
 				users = [...users, doc.data()];
+				usersList.set(users);
 			});
 		} catch (err) {
 			console.log(err);

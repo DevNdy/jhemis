@@ -25,7 +25,6 @@
 			try {
 				await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
 					const user = userCredential.user;
-					localStorage.setItem('uid', user.uid);
 					setDoc(doc(db, 'Users', user.uid), {
 						date: dateOfDay,
 						email: email,

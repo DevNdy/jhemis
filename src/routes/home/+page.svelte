@@ -1,15 +1,27 @@
 <script>
+	import PostWindow from '$lib/home/PostWindow.svelte';
 	import NavBar from '$lib/navbar/NavBar.svelte';
+
+	let newPost = false;
 </script>
 
 <main>
 	<NavBar />
-	<div>
-		<h2>Accueil</h2>
-	</div>
+	<section>
+		<div>
+			<h2>Accueil</h2>
+			<button on:click={() => (newPost = true)}
+				><i class="fa-solid fa-feather" />Écrire un post</button
+			>
+		</div>
+		{#if newPost === true}
+			<PostWindow onClickCloseWindow={() => (newPost = false)} />
+			<div class="filterPage" />
+		{/if}
+	</section>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		height: 100vh;
 		display: flex;
@@ -17,10 +29,47 @@
 		align-items: center;
 	}
 
-	div {
-		margin: 40px 0 0 250px;
+	section {
+		margin: 35px 0 0 250px;
 		min-height: 100vh;
 		width: 1100px;
-		background-color: gray;
+	}
+
+	div {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+
+		button {
+			height: 40px;
+			padding: 3px 10px 3px 10px;
+			background-color: white;
+			border: 1px solid #373435;
+			color: #373435;
+			border-radius: 5px;
+			cursor: pointer;
+
+			i {
+				margin-right: 10px;
+				color: #bf9b58;
+			}
+
+			&:hover {
+				background-color: #373435;
+				color: white;
+			}
+		}
+	}
+
+	.filterPage {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(55, 52, 53, 0.805);
+		z-index: 10;
 	}
 </style>
