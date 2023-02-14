@@ -7,6 +7,12 @@
 	export let description: string;
 	export let img: string;
 	export let idUser: string;
+	export let nbrLike: number;
+	export let onClickLike: () => void;
+	export let like: any;
+	export let onClickDelete: () => void;
+
+	let openMenuPost: boolean = false;
 </script>
 
 <div class="post">
@@ -16,16 +22,24 @@
 			<p>{nameUser} <span>{date}</span></p>
 		</div>
 		{#if $authStore.uid === idUser}
-			<button class="btnParams">...</button>
+			<button on:click={onClickDelete} class="btnDelete"><i class="fa-solid fa-trash" /></button>
 		{/if}
 	</div>
 	<p class="description">{description}</p>
 	<img class="imgPost" src={img} alt="post" />
+	<div class="icons">
+		<i
+			on:click={onClickLike}
+			on:keypress
+			class={like ? 'fa-solid fa-heart iRed' : 'fa-regular fa-heart'}
+		/>
+		<p>{nbrLike}</p>
+	</div>
 </div>
 
 <style lang="scss">
 	.post {
-		margin-top: 30px;
+		margin: 15px 0 15px 0;
 		width: 700px;
 		background-color: white;
 		padding: 15px;
@@ -57,18 +71,24 @@
 				}
 			}
 		}
-		.btnParams {
+		.btnDelete {
 			height: 15px;
 			width: 25px;
 			border: none;
 			background-color: white;
-			color: #bf9b58;
-			font-size: 22px;
+			font-size: 15px;
 			cursor: pointer;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+
+			i {
+				color: #bf9b58;
+				&:hover {
+					color: red;
+				}
+			}
 		}
 	}
 
@@ -79,5 +99,26 @@
 	.imgPost {
 		width: 700px;
 		border-radius: 8px;
+	}
+
+	.icons {
+		margin-top: 5px;
+		display: flex;
+		align-items: center;
+
+		.iRed {
+			color: rgb(189, 8, 8);
+		}
+
+		i {
+			margin-right: 10px;
+			color: gray;
+			font-size: 20px;
+			cursor: pointer;
+		}
+
+		p {
+			margin-top: 5px;
+		}
 	}
 </style>

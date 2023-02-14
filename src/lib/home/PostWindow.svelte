@@ -28,11 +28,12 @@
 				description: description,
 				img: urlImg,
 				userName: $userName.name,
-				avatar: $userName.avatar
+				avatar: $userName.avatar,
+				like: []
 			});
 			description = '';
 			urlImg = '';
-			window.location.reload();
+			onClickCloseWindow();
 		} catch (err) {
 			console.log(err);
 		}

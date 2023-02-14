@@ -2,12 +2,21 @@
 	import ModalPost from '$lib/home/ModalPost.svelte';
 	import PostWindow from '$lib/home/PostWindow.svelte';
 	import NavBar from '$lib/navbar/NavBar.svelte';
-	import { collection, getDocs, orderBy, query } from 'firebase/firestore';
-	import { onMount } from 'svelte';
+
+	import {
+		arrayRemove,
+		arrayUnion,
+		collection,
+		deleteDoc,
+		doc,
+		onSnapshot,
+		updateDoc
+	} from 'firebase/firestore';
 	import { authStore, usersList, userName, postsList } from '../../stores/dataUsers';
 	import { db } from '../fb';
 
 	let newPost = false;
+	let islike: any;
 	let posts: any = [];
 
 	//récup userName & avatar
@@ -20,19 +29,32 @@
 			: ''
 	);
 
-	onMount(async () => {
-		try {
-			const q = query(collection(db, 'Posts'), orderBy('time', 'desc'));
+	const colRef: any = collection(db, 'Posts');
 
-			const querySnapshot = await getDocs(q);
-			querySnapshot.forEach((doc) => {
-				posts = [...posts, doc.data()];
-				postsList.set(posts);
+	const getPosts = onSnapshot(colRef, (querySnapshot: any) => {
+		let fbTodos: any = [];
+		querySnapshot.forEach((doc: any) => {
+			let todo = { ...doc.data(), id: doc.id };
+			fbTodos = [todo, ...fbTodos];
+			postsList.set(fbTodos);
+		});
+		posts = fbTodos;
+	});
+
+	const onClickLike = async (id: string, like: string[]) => {
+		islike = like.includes($authStore.uid);
+		try {
+			await updateDoc(doc(db, 'Posts', id), {
+				like: islike ? arrayRemove($authStore.uid) : arrayUnion($authStore.uid)
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	});
+	};
+
+	const onClickDeletePost = async (id: string) => {
+		await deleteDoc(doc(db, 'Posts', id));
+	};
 </script>
 
 <main>
@@ -44,7 +66,7 @@
 				><i class="fa-solid fa-feather" />Écrire un post</button
 			>
 		</div>
-		{#each $postsList as item}
+		{#each posts as item}
 			<ModalPost
 				avatar={item.avatar}
 				nameUser={item.userName}
@@ -52,6 +74,10 @@
 				description={item.description}
 				img={item.img}
 				idUser={item.idUser}
+				nbrLike={item.like.length}
+				onClickLike={() => onClickLike(item.idPost, item.like)}
+				like={item.like.includes($authStore.uid)}
+				onClickDelete={() => onClickDeletePost(item.idPost)}
 			/>
 		{/each}
 		{#if newPost === true}
@@ -71,7 +97,7 @@
 
 	section {
 		margin: 35px 0 0 250px;
-		min-height: 100vh;
+		min-height: 90vh;
 		width: 1100px;
 	}
 
@@ -85,9 +111,9 @@
 		button {
 			height: 40px;
 			padding: 3px 10px 3px 10px;
-			background-color: white;
+			background-color: #373435;
 			border: 1px solid #373435;
-			color: #373435;
+			color: white;
 			border-radius: 5px;
 			cursor: pointer;
 
@@ -97,8 +123,7 @@
 			}
 
 			&:hover {
-				background-color: #373435;
-				color: white;
+				opacity: 0.8;
 			}
 		}
 	}
