@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import EditProfile from '$lib/profile/EditProfile.svelte';
+	import PostListUserProfile from '$lib/profile/PostListUserProfile.svelte';
 	import ProfileInfos from '$lib/profile/ProfileInfos.svelte';
 	import { doc, updateDoc } from 'firebase/firestore';
 	import { authStore, usersList } from '../../../stores/dataUsers';
@@ -39,35 +40,34 @@
 <main>
 	<section>
 		<h2>Mon compte</h2>
-		<div>
-			{#await $usersList then items}
-				{#each items as item}
-					{#if item.id === $authStore.uid}
-						<ProfileInfos
-							onClickEdit={() => (openEdit = true)}
-							firstName={item.firstName}
-							lastName={item.lastName}
-							date={item.date}
-							avatar={item.avatar}
-							email={item.email}
-							description={item.description}
+		{#await $usersList then items}
+			{#each items as item}
+				{#if item.id === $authStore.uid}
+					<ProfileInfos
+						onClickEdit={() => (openEdit = true)}
+						firstName={item.firstName}
+						lastName={item.lastName}
+						date={item.date}
+						avatar={item.avatar}
+						email={item.email}
+						description={item.description}
+					/>
+					{#if openEdit === true}
+						<EditProfile
+							bind:urlImg={avatarEdit}
+							bind:firstNameEdit
+							bind:lastNameEdit
+							bind:descriptionEdit
+							onClickClose={() => (openEdit = false)}
+							onSubmit={() =>
+								upadateImg(item.id, item.avatar, item.description, item.firstName, item.lastName)}
 						/>
-						{#if openEdit === true}
-							<EditProfile
-								bind:urlImg={avatarEdit}
-								bind:firstNameEdit
-								bind:lastNameEdit
-								bind:descriptionEdit
-								onClickClose={() => (openEdit = false)}
-								onSubmit={() =>
-									upadateImg(item.id, item.avatar, item.description, item.firstName, item.lastName)}
-							/>
-							<div class="filterPageEdit" />
-						{/if}
+						<div class="filterPageEdit" />
 					{/if}
-				{/each}
-			{/await}
-		</div>
+				{/if}
+			{/each}
+		{/await}
+		<PostListUserProfile />
 	</section>
 </main>
 

@@ -9,6 +9,8 @@
 		deleteDoc,
 		doc,
 		onSnapshot,
+		orderBy,
+		query,
 		updateDoc
 	} from 'firebase/firestore';
 	import { authStore, usersList, userName, postsList } from '../../stores/dataUsers';
@@ -28,7 +30,7 @@
 			: ''
 	);
 
-	const colRef: any = collection(db, 'Posts');
+	const colRef: any = query(collection(db, 'Posts'), orderBy('time', 'asc'));
 
 	const getPosts = onSnapshot(colRef, (querySnapshot: any) => {
 		let fbTodos: any = [];

@@ -33,7 +33,7 @@
 
 <header>
 	<div>
-		<img src="../logoSimple.png" alt="logo" />
+		<img src="/logoSimple.png" alt="logo" />
 		<h2><span>J</span>hémis</h2>
 	</div>
 
