@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FormEditPost from '$lib/postPage/FormEditPost.svelte';
 	import { deleteDoc, doc } from 'firebase/firestore';
 	import { postsList } from '../../../../stores/dataUsers';
 	import { db } from '../../../fb';
@@ -18,7 +19,7 @@
 			{#if item.idPost === product.postId}
 				<div>
 					<h3>
-						Posté le : {item.date}
+						Posté le {item.date}
 						<span
 							><i
 								on:click={() => (editPost = !editPost)}
@@ -33,17 +34,11 @@
 						>
 					</h3>
 					<img src={item.img} alt="post" />
+					<h5><span><i class="fa-solid fa-heart" />Like:</span> {item.like.length}</h5>
 					<p><span>Description:</span>{item.description}</p>
 				</div>
 				{#if editPost === true}
-					<form>
-						<h4>Edition du post:</h4>
-						<input type="text" placeholder="Url image" />
-						<textarea cols="30" rows="5" placeholder="Description du post" />
-						<div>
-							<button>valider</button>
-						</div>
-					</form>
+					<FormEditPost />
 				{/if}
 			{/if}
 		{/each}
@@ -68,6 +63,7 @@
 		font-weight: 300;
 		font-size: 15px;
 		max-width: 400px;
+		font-style: italic;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -95,6 +91,21 @@
 		margin: 15px 0 0 5px;
 	}
 
+	h5 {
+		font-weight: 300;
+		font-size: 15px;
+		margin: 10px 0 10px 0;
+
+		span {
+			font-weight: 600;
+
+			i {
+				margin-right: 5px;
+				color: #bf9b58;
+			}
+		}
+	}
+
 	p {
 		display: flex;
 		flex-direction: column;
@@ -102,58 +113,6 @@
 		span {
 			text-decoration: underline;
 			font-weight: 500;
-		}
-	}
-
-	form {
-		height: 230px;
-		width: 410px;
-		margin: 47px 0 0 30px;
-		padding: 15px;
-		border: 0.5px solid rgb(119, 117, 118);
-		border-radius: 8px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-
-		h4 {
-			font-weight: 500;
-		}
-
-		input {
-			margin-top: 10px;
-			padding-left: 5px;
-			height: 35px;
-			width: 403px;
-			border-radius: 5px;
-			border: #373435 0.5px solid;
-		}
-
-		textarea {
-			margin-top: 5px;
-			width: 400px;
-			border-radius: 5px;
-			border: #373435 0.5px solid;
-			padding: 5px;
-		}
-
-		div {
-			width: 100%;
-			text-align: end;
-			button {
-				margin-top: 10px;
-				background-color: #373435;
-				color: white;
-				border: none;
-				font-size: 15px;
-				padding: 3px 10px 3px 10px;
-				border-radius: 5px;
-				cursor: pointer;
-
-				&:hover {
-					opacity: 0.8;
-				}
-			}
 		}
 	}
 </style>
