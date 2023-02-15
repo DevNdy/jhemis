@@ -95,10 +95,11 @@
 
 		.close {
 			margin: 10px;
-			width: 28px;
-			height: 28px;
-			border-radius: 5px;
-			font-size: 20px;
+			width: 20px;
+			height: 20px;
+			padding: 3px;
+			border-radius: 50%;
+			font-size: 16px;
 			background-color: #373435;
 			color: white;
 			display: flex;
@@ -127,6 +128,7 @@
 
 		img {
 			height: 50px;
+			border-radius: 50%;
 		}
 	}
 

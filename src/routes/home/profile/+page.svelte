@@ -1,14 +1,38 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import EditProfile from '$lib/profile/EditProfile.svelte';
 	import { doc, updateDoc } from 'firebase/firestore';
 	import { authStore, usersList } from '../../../stores/dataUsers';
 	import { db } from '../../fb';
 
-	let avatarEdit = '';
+	let avatarEdit: string = '';
+	let firstNameEdit: string = '';
+	let lastNameEdit: string = '';
+	let descriptionEdit: string = '';
 
-	const upadateImg = (id: string) =>
-		updateDoc(doc(db, 'Users', id), {
-			avatar: avatarEdit
-		});
+	let openEdit: boolean = false;
+
+	const upadateImg = async (
+		id: string,
+		avatar: string,
+		description: string,
+		firstName: string,
+		lastName: string
+	) => {
+		try {
+			await updateDoc(doc(db, 'Users', id), {
+				avatar: avatarEdit === '' ? avatar : avatarEdit,
+				description: descriptionEdit === '' ? description : descriptionEdit,
+				firstName: firstNameEdit === '' ? firstName : firstNameEdit,
+				lastName: lastNameEdit === '' ? lastName : lastNameEdit
+			});
+			openEdit = false;
+			window.location.reload();
+			goto('/home/profile');
+		} catch (err) {
+			console.log(err);
+		}
+	};
 </script>
 
 <main>
@@ -20,13 +44,24 @@
 					{#if item.id === $authStore.uid}
 						<span>
 							<img src={item.avatar} alt="avatar" />
-							<i on:click={() => upadateImg(item.id)} on:keypress class="fa-solid fa-pen" />
+							<i on:click={() => (openEdit = true)} on:keypress class="fa-solid fa-pen" />
 						</span>
-						<input type="text" placeholder="change img" bind:value={avatarEdit} />
 						<h3>{item.firstName + ' ' + item.lastName}</h3>
 						<h3>{item.email}</h3>
 						<h3>Date création compte: {item.date}</h3>
 						<p>{item.description}</p>
+						{#if openEdit === true}
+							<EditProfile
+								bind:urlImg={avatarEdit}
+								bind:firstNameEdit
+								bind:lastNameEdit
+								bind:descriptionEdit
+								onClickClose={() => (openEdit = false)}
+								onSubmit={() =>
+									upadateImg(item.id, item.avatar, item.description, item.firstName, item.lastName)}
+							/>
+							<div class="filterPageEdit" />
+						{/if}
 					{/if}
 				{/each}
 			{/await}
@@ -95,5 +130,15 @@
 			border: 0.5px solid #373435;
 			border-radius: 5px;
 		}
+	}
+
+	.filterPageEdit {
+		position: fixed;
+		top: -100px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #a3a3a38d;
+		z-index: 20;
 	}
 </style>

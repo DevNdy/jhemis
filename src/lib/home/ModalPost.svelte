@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { authStore, usersList, userName } from '../../stores/dataUsers';
 
-	export let avatar: string;
-	export let nameUser: string;
 	export let date: string;
 	export let description: string;
 	export let img: string;
@@ -11,22 +9,26 @@
 	export let onClickLike: () => void;
 	export let like: any;
 	export let onClickDelete: () => void;
-
-	let openMenuPost: boolean = false;
 </script>
 
 <div class="post">
 	<div class="top">
 		<div>
-			<img src={avatar} alt="avatar" />
-			<p>{nameUser} <span>{date}</span></p>
+			{#each $usersList as item}
+				{#if item.id === idUser}
+					<img src={item.avatar} alt="avatar" />
+					<p>{item.firstName + ' ' + item.lastName} <span>{date}</span></p>
+				{/if}
+			{/each}
 		</div>
 		{#if $authStore.uid === idUser}
 			<button on:click={onClickDelete} class="btnDelete"><i class="fa-solid fa-trash" /></button>
 		{/if}
 	</div>
 	<p class="description">{description}</p>
-	<img class="imgPost" src={img} alt="post" />
+	{#if img !== ''}
+		<img class="imgPost" src={img} alt="post" />
+	{/if}
 	<div class="icons">
 		<i
 			on:click={onClickLike}
@@ -56,6 +58,7 @@
 
 			img {
 				height: 40px;
+				border-radius: 50%;
 			}
 
 			p {

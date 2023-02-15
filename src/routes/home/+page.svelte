@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ModalPost from '$lib/home/ModalPost.svelte';
-	import PostWindow from '$lib/home/PostWindow.svelte';
+	import WritePostWindow from '$lib/home/WritePostWindow.svelte';
 
 	import {
 		arrayRemove,
@@ -66,8 +66,6 @@
 		</div>
 		{#each posts as item}
 			<ModalPost
-				avatar={item.avatar}
-				nameUser={item.userName}
 				date={item.date}
 				description={item.description}
 				img={item.img}
@@ -79,7 +77,7 @@
 			/>
 		{/each}
 		{#if newPost === true}
-			<PostWindow onClickCloseWindow={() => (newPost = false)} />
+			<WritePostWindow onClickCloseWindow={() => (newPost = false)} />
 			<div class="filterPage" />
 		{/if}
 	</section>
