@@ -5,6 +5,7 @@
 	import { goto } from '$app/navigation';
 	import { auth } from './fb';
 	import { authStore } from '../stores/dataUsers';
+	import NavBar from '$lib/navbar/NavBar.svelte';
 
 	let loading = false;
 

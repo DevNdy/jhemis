@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ModalPost from '$lib/home/ModalPost.svelte';
 	import PostWindow from '$lib/home/PostWindow.svelte';
-	import NavBar from '$lib/navbar/NavBar.svelte';
 
 	import {
 		arrayRemove,
@@ -58,7 +57,6 @@
 </script>
 
 <main>
-	<NavBar />
 	<section>
 		<div>
 			<h2>Accueil</h2>

@@ -33,7 +33,7 @@
 
 <header>
 	<div>
-		<img src="./logoSimple.png" alt="logo" />
+		<img src="../logoSimple.png" alt="logo" />
 		<h2><span>J</span>hémis</h2>
 	</div>
 
@@ -47,10 +47,10 @@
 	{/each}
 
 	<ul>
-		<li><i class="fa-solid fa-house" />Accueil</li>
-		<li><i class="fa-solid fa-globe" />News</li>
-		<li><i class="fa-solid fa-message" />Messages</li>
-		<li><i class="fa-solid fa-circle-user" />Mon compte</li>
+		<li><a href="/home"><i class="fa-solid fa-house" />Accueil</a></li>
+		<li><a href="/"><i class="fa-solid fa-globe" />News</a></li>
+		<li><a href="/"><i class="fa-solid fa-message" />Messages</a></li>
+		<li><a href="/home/profile"><i class="fa-solid fa-circle-user" />Mon compte</a></li>
 	</ul>
 
 	<button on:click={signOutUser}>se déconnecter</button>
@@ -104,7 +104,8 @@
 		}
 
 		.avatar {
-			margin-left: 20px;
+			border-radius: 50%;
+			margin-left: 15px;
 			height: 45px;
 		}
 	}
@@ -126,22 +127,33 @@
 			align-items: center;
 			justify-content: flex-start;
 			cursor: pointer;
+
+			a {
+				height: 60px;
+				width: 225px;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+
+				i {
+					font-size: 20px;
+					margin: 0 15px 4px 20px;
+					color: #373435;
+				}
+			}
 		}
 
 		li:hover {
 			background-color: #373435;
 			border-right: 5px solid #bf9b58;
 			color: white;
-		}
+			a {
+				color: white;
+			}
 
-		i {
-			font-size: 20px;
-			margin: 0 15px 4px 20px;
-			color: #373435;
-		}
-
-		li:hover i {
-			color: white;
+			i {
+				color: white;
+			}
 		}
 	}
 
