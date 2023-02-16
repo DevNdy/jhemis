@@ -1,12 +1,32 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { signOut } from 'firebase/auth';
-	import { collection, getDocs, query } from 'firebase/firestore';
-	import { onMount } from 'svelte';
+	import { collection, onSnapshot, query } from 'firebase/firestore';
 	import { auth, db } from '../../routes/fb';
-	import { authStore, usersList } from '../../stores/dataUsers';
+	import { authStore, usersList, userName } from '../../stores/dataUsers';
 
 	let users: any = [];
+	const colRefUser: any = query(collection(db, 'Users'));
+
+	const getUsers = onSnapshot(colRefUser, (querySnapshot: any) => {
+		let fbTodos: any = [];
+		querySnapshot.forEach((doc: any) => {
+			let todo = { ...doc.data(), id: doc.id };
+			fbTodos = [todo, ...fbTodos];
+			usersList.set(fbTodos);
+		});
+		users = fbTodos;
+	});
+
+	//récup userName & avatar
+	$: $usersList.filter((e: any) =>
+		e.id === $authStore.uid
+			? userName.set({
+					name: e.firstName + ' ' + e.lastName,
+					avatar: e.avatar
+			  })
+			: ''
+	);
 
 	const signOutUser = () => {
 		signOut(auth)
@@ -15,20 +35,6 @@
 			})
 			.catch((err) => console.log(err));
 	};
-
-	onMount(async () => {
-		try {
-			const q = query(collection(db, 'Users'));
-
-			const querySnapshot = await getDocs(q);
-			querySnapshot.forEach((doc) => {
-				users = [...users, doc.data()];
-				usersList.set(users);
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	});
 </script>
 
 <header>
@@ -37,7 +43,7 @@
 		<h2><span>J</span>hémis</h2>
 	</div>
 
-	{#each users as item}
+	{#each $usersList as item}
 		{#if item.id === $authStore.uid}
 			<div class="profil">
 				<img class="avatar" src={item.avatar} alt="avatar" />

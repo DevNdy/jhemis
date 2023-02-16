@@ -1,7 +1,13 @@
-<form>
+<script lang="ts">
+	export let onSubmit: () => {};
+	export let urlImg: string;
+	export let description: string;
+</script>
+
+<form on:submit={onSubmit}>
 	<h4>Edition du post:</h4>
-	<input type="text" placeholder="Url image" />
-	<textarea cols="30" rows="5" placeholder="Description du post" />
+	<input type="text" placeholder="Url image" bind:value={urlImg} />
+	<textarea cols="30" rows="5" placeholder="Description du post" bind:value={description} />
 	<div>
 		<button>valider</button>
 	</div>
@@ -32,12 +38,20 @@
 			border: #373435 0.5px solid;
 		}
 
+		input:focus {
+			outline-color: #bf9b58;
+		}
+
 		textarea {
 			margin-top: 5px;
 			width: 400px;
 			border-radius: 5px;
 			border: #373435 0.5px solid;
 			padding: 5px;
+		}
+
+		textarea:focus {
+			outline-color: #bf9b58;
 		}
 
 		div {

@@ -13,22 +13,12 @@
 		query,
 		updateDoc
 	} from 'firebase/firestore';
-	import { authStore, usersList, userName, postsList } from '../../stores/dataUsers';
+	import { authStore, postsList } from '../../stores/dataUsers';
 	import { db } from '../fb';
 
 	let newPost = false;
 	let islike: any;
 	let posts: any = [];
-
-	//récup userName & avatar
-	$: $usersList.filter((e: any) =>
-		e.id === $authStore.uid
-			? userName.set({
-					name: e.firstName + ' ' + e.lastName,
-					avatar: e.avatar
-			  })
-			: ''
-	);
 
 	const colRef: any = query(collection(db, 'Posts'), orderBy('time', 'asc'));
 

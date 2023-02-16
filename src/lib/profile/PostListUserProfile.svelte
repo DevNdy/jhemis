@@ -1,6 +1,5 @@
 <script>
 	import { postsList, authStore } from '../../stores/dataUsers';
-	let hello;
 </script>
 
 <div>

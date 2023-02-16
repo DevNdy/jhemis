@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import EditProfile from '$lib/profile/EditProfile.svelte';
 	import PostListUserProfile from '$lib/profile/PostListUserProfile.svelte';
 	import ProfileInfos from '$lib/profile/ProfileInfos.svelte';
@@ -14,7 +13,7 @@
 
 	let openEdit: boolean = false;
 
-	const upadateImg = async (
+	const upadateProfile = async (
 		id: string,
 		avatar: string,
 		description: string,
@@ -29,8 +28,10 @@
 				lastName: lastNameEdit === '' ? lastName : lastNameEdit
 			});
 			openEdit = false;
-			window.location.reload();
-			goto('/home/profile');
+			avatarEdit = '';
+			firstNameEdit = '';
+			lastNameEdit = '';
+			descriptionEdit = '';
 		} catch (err) {
 			console.log(err);
 		}
@@ -60,7 +61,13 @@
 							bind:descriptionEdit
 							onClickClose={() => (openEdit = false)}
 							onSubmit={() =>
-								upadateImg(item.id, item.avatar, item.description, item.firstName, item.lastName)}
+								upadateProfile(
+									item.id,
+									item.avatar,
+									item.description,
+									item.firstName,
+									item.lastName
+								)}
 						/>
 						<div class="filterPageEdit" />
 					{/if}

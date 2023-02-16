@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Loader from '$lib/ui-reusable/Loader.svelte';
 	import { onMount } from 'svelte';
-	import { getAuth, onAuthStateChanged } from 'firebase/auth';
+	import { onAuthStateChanged } from 'firebase/auth';
 	import { goto } from '$app/navigation';
 	import { auth } from './fb';
 	import { authStore } from '../stores/dataUsers';
-	import NavBar from '$lib/navbar/NavBar.svelte';
 
 	let loading = false;
 

@@ -1,15 +1,30 @@
 <script lang="ts">
 	import FormEditPost from '$lib/postPage/FormEditPost.svelte';
-	import { deleteDoc, doc } from 'firebase/firestore';
+	import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 	import { postsList } from '../../../../stores/dataUsers';
 	import { db } from '../../../fb';
 	export let data;
 	const { product } = data;
 
 	let editPost: boolean = false;
+	let urlImg = '';
+	let description = '';
 
 	const onClickDeletePost = async (id: string) => {
 		await deleteDoc(doc(db, 'Posts', id));
+	};
+
+	const onSubmitEditPost = async (id: string, img: string, descriptionPost: string) => {
+		try {
+			await updateDoc(doc(db, 'Posts', id), {
+				img: urlImg === '' ? img : urlImg,
+				description: description === '' ? descriptionPost : description
+			});
+			urlImg = '';
+			description = '';
+		} catch (err) {
+			console.log(err);
+		}
 	};
 </script>
 
@@ -38,7 +53,11 @@
 					<p><span>Description:</span>{item.description}</p>
 				</div>
 				{#if editPost === true}
-					<FormEditPost />
+					<FormEditPost
+						onSubmit={() => onSubmitEditPost(item.idPost, item.img, item.description)}
+						bind:urlImg
+						bind:description
+					/>
 				{/if}
 			{/if}
 		{/each}
@@ -107,6 +126,7 @@
 	}
 
 	p {
+		width: 500px;
 		display: flex;
 		flex-direction: column;
 		color: rgb(104, 104, 104);
