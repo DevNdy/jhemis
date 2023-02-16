@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { authStore, usersList, userName } from '../../stores/dataUsers';
+	import { authStore, usersList } from '../../stores/dataUsers';
 
 	export let date: string;
 	export let description: string;

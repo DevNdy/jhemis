@@ -10,7 +10,6 @@
 	let firstNameEdit: string = '';
 	let lastNameEdit: string = '';
 	let descriptionEdit: string = '';
-	let likes: number = 0;
 
 	let openEdit: boolean = false;
 

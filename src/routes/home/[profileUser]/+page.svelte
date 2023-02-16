@@ -116,7 +116,7 @@
 
 	.post {
 		margin-top: 10px;
-		width: 800px;
+		width: 900px;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
