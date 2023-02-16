@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 
 	let newsData: any = [];
+	let indexNbr: number = 6;
 
 	const getApiNews = async () => {
 		const res = await fetch(
@@ -22,20 +23,24 @@
 	<section>
 		<h2>News</h2>
 		<div class="news">
-			{#each newsData as item}
-				{#if item.urlToImage !== null}
+			{#each newsData as item, index}
+				{#if item.urlToImage !== null && index < indexNbr}
 					<div class="article">
 						<img src={item.urlToImage} alt="" />
 						<div class="description">
 							<h3>{item.title}</h3>
-							<p>{item.content}</p>
+							<p>{item.description}</p>
 							<div>
-								<a href="/">en savoir +</a>
+								<h5>Source: <span>{item.source.name}</span></h5>
+								<a href={item.url} target="_blank" rel="noopener noreferrer">en savoir +</a>
 							</div>
 						</div>
 					</div>
 				{/if}
 			{/each}
+			<div class="divBtn">
+				<button class="btnMoreData" on:click={() => (indexNbr = indexNbr + 5)}>charger plus</button>
+			</div>
 		</div>
 	</section>
 </main>
@@ -92,7 +97,18 @@
 			}
 
 			div {
-				text-align: end;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+
+				h5 {
+					margin-left: 10px;
+					font-style: italic;
+					span {
+						font-weight: 400;
+					}
+				}
+
 				a {
 					text-decoration: none;
 					padding: 1px 8px 1px 8px;
@@ -107,6 +123,24 @@
 						opacity: 0.7;
 					}
 				}
+			}
+		}
+	}
+
+	.divBtn {
+		text-align: center;
+		.btnMoreData {
+			height: 30px;
+			width: 100px;
+			margin: 20px;
+			background-color: #373435;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+
+			&:hover {
+				opacity: 0.8;
 			}
 		}
 	}
