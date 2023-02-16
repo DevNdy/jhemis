@@ -25,14 +25,13 @@
 			try {
 				await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
 					const user = userCredential.user;
-					localStorage.setItem('uid', user.uid);
 					setDoc(doc(db, 'Users', user.uid), {
 						date: dateOfDay,
 						email: email,
 						firstName: firstName,
 						lastName: lastName,
 						id: user.uid,
-						avatar: '',
+						avatar: 'https://cdn-icons-png.flaticon.com/512/149/149995.png',
 						description: ''
 					});
 					messageError = '';
@@ -109,7 +108,7 @@
 		height: 35px;
 		width: 300px;
 		border-radius: 5px;
-		border: 0.5px solid black;
+		border: 0.5px solid #373435;
 		padding-left: 5px;
 	}
 
@@ -145,7 +144,7 @@
 		margin-top: 12px;
 		border: none;
 		border-radius: 5px;
-		background-color: black;
+		background-color: #373435;
 		color: white;
 		font-size: 16px;
 		cursor: pointer;
