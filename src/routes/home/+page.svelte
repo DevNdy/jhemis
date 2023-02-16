@@ -61,9 +61,11 @@
 	}
 
 	section {
-		margin: 35px 0 0 250px;
-		min-height: 90vh;
+		margin: 35px 30px 150px;
 		width: 1100px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	div {
@@ -73,7 +75,13 @@
 		justify-content: space-between;
 		align-items: flex-start;
 
+		h2 {
+			margin-left: 110px;
+		}
+
 		button {
+			position: fixed;
+			right: 60px;
 			height: 40px;
 			padding: 3px 10px 3px 10px;
 			background-color: #373435;

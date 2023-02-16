@@ -34,5 +34,6 @@
 		height: 80px;
 		margin: 5px;
 		cursor: pointer;
+		border-radius: 5px;
 	}
 </style>

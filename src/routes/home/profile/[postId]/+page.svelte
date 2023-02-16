@@ -1,7 +1,7 @@
 <script lang="ts">
 	import FormEditPost from '$lib/postPage/FormEditPost.svelte';
 	import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
-	import { postsList } from '../../../../stores/dataUsers';
+	import { postsList, authStore } from '../../../../stores/dataUsers';
 	import { db } from '../../../fb';
 	export let data;
 	const { product } = data;
@@ -35,18 +35,20 @@
 				<div>
 					<h3>
 						Posté le {item.date}
-						<span
-							><i
-								on:click={() => (editPost = !editPost)}
-								on:keypress
-								class="fa-solid fa-pen iEdit "
-							/>
-							<i
-								on:click={() => onClickDeletePost(item.idPost)}
-								on:keypress
-								class="fa-solid fa-trash iDelete"
-							/></span
-						>
+						{#if item.idUser === $authStore.uid}
+							<span
+								><i
+									on:click={() => (editPost = !editPost)}
+									on:keypress
+									class="fa-solid fa-pen iEdit "
+								/>
+								<i
+									on:click={() => onClickDeletePost(item.idPost)}
+									on:keypress
+									class="fa-solid fa-trash iDelete"
+								/></span
+							>
+						{/if}
 					</h3>
 					<img src={item.img} alt="post" />
 					<h5><span><i class="fa-solid fa-heart" />Like:</span> {item.like.length}</h5>
