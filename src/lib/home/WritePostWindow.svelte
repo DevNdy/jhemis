@@ -70,7 +70,6 @@
 	.window {
 		width: 600px;
 		background-color: white;
-		border: 1px solid #373435;
 		border-radius: 8px;
 		position: absolute;
 		top: 100px;

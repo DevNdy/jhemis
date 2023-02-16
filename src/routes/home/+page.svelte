@@ -2,35 +2,12 @@
 	import ModalPost from '$lib/home/ModalPost.svelte';
 	import WritePostWindow from '$lib/home/WritePostWindow.svelte';
 
-	import {
-		arrayRemove,
-		arrayUnion,
-		collection,
-		deleteDoc,
-		doc,
-		onSnapshot,
-		orderBy,
-		query,
-		updateDoc
-	} from 'firebase/firestore';
+	import { arrayRemove, arrayUnion, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 	import { authStore, postsList } from '../../stores/dataUsers';
 	import { db } from '../fb';
 
 	let newPost = false;
 	let islike: any;
-	let posts: any = [];
-
-	const colRef: any = query(collection(db, 'Posts'), orderBy('time', 'asc'));
-
-	const getPosts = onSnapshot(colRef, (querySnapshot: any) => {
-		let fbTodos: any = [];
-		querySnapshot.forEach((doc: any) => {
-			let todo = { ...doc.data(), id: doc.id };
-			fbTodos = [todo, ...fbTodos];
-			postsList.set(fbTodos);
-		});
-		posts = fbTodos;
-	});
 
 	const onClickLike = async (id: string, like: string[]) => {
 		islike = like.includes($authStore.uid);
@@ -56,7 +33,7 @@
 				><i class="fa-solid fa-feather" />Écrire un post</button
 			>
 		</div>
-		{#each posts as item}
+		{#each $postsList as item}
 			<ModalPost
 				date={item.date}
 				description={item.description}

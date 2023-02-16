@@ -3,13 +3,14 @@
 	import PostListUserProfile from '$lib/profile/PostListUserProfile.svelte';
 	import ProfileInfos from '$lib/profile/ProfileInfos.svelte';
 	import { doc, updateDoc } from 'firebase/firestore';
-	import { authStore, usersList } from '../../../stores/dataUsers';
+	import { authStore, usersList, postsList } from '../../../stores/dataUsers';
 	import { db } from '../../fb';
 
 	let avatarEdit: string = '';
 	let firstNameEdit: string = '';
 	let lastNameEdit: string = '';
 	let descriptionEdit: string = '';
+	let likes: number = 0;
 
 	let openEdit: boolean = false;
 

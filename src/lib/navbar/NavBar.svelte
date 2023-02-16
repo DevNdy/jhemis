@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { signOut } from 'firebase/auth';
-	import { collection, onSnapshot, query } from 'firebase/firestore';
+	import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 	import { auth, db } from '../../routes/fb';
-	import { authStore, usersList, userName } from '../../stores/dataUsers';
+	import { authStore, usersList, userName, postsList } from '../../stores/dataUsers';
 
 	let users: any = [];
+
 	const colRefUser: any = query(collection(db, 'Users'));
 
 	const getUsers = onSnapshot(colRefUser, (querySnapshot: any) => {
@@ -27,6 +28,17 @@
 			  })
 			: ''
 	);
+
+	const colRef: any = query(collection(db, 'Posts'), orderBy('time', 'asc'));
+
+	const getPosts = onSnapshot(colRef, (querySnapshot: any) => {
+		let fbTodos: any = [];
+		querySnapshot.forEach((doc: any) => {
+			let todo = { ...doc.data(), id: doc.id };
+			fbTodos = [todo, ...fbTodos];
+			postsList.set(fbTodos);
+		});
+	});
 
 	const signOutUser = () => {
 		signOut(auth)

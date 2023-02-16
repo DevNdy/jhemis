@@ -1,17 +1,15 @@
-<script>
+<script lang="ts">
 	import { postsList, authStore } from '../../stores/dataUsers';
 </script>
 
 <div>
 	<h4>Mes publications :</h4>
 	<div class="posts">
-		{#await $postsList then items}
-			{#each items as item}
-				{#if $authStore.uid === item.idUser && item.img !== ''}
-					<a href={`/home/profile/${item.idPost}`}><img src={item.img} alt="imgPosts" /></a>
-				{/if}
-			{/each}
-		{/await}
+		{#each $postsList as item}
+			{#if $authStore.uid === item.idUser && item.img !== ''}
+				<a href={`/home/profile/${item.idPost}`}><img src={item.img} alt="imgPosts" /></a>
+			{/if}
+		{/each}
 	</div>
 </div>
 
