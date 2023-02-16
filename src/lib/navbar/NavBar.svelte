@@ -66,8 +66,8 @@
 
 	<ul>
 		<li><a href="/home"><i class="fa-solid fa-house" />Accueil</a></li>
-		<li><a href="/home"><i class="fa-solid fa-globe" />News</a></li>
-		<li><a href="/home"><i class="fa-solid fa-message" />Messages</a></li>
+		<li><a href="/home/news"><i class="fa-solid fa-globe" />News</a></li>
+		<li><a href="/home/message"><i class="fa-solid fa-message" />Messages</a></li>
 		<li><a href="/home/profile"><i class="fa-solid fa-circle-user" />Mon compte</a></li>
 	</ul>
 
