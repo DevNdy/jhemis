@@ -4,6 +4,11 @@
 	import { auth, db } from '../../routes/fb';
 	import { doc, setDoc } from 'firebase/firestore';
 
+	//id
+	const generateId = Math.floor((1 + Math.random()) * 0x10000)
+		.toString(16)
+		.substring(1);
+
 	const date = new Date();
 	const options: {} = { weekday: 'long', year: 'numeric', month: 'long', day: '2-digit' };
 	const dateOfDay = date.toLocaleDateString('fr-FR', options);
@@ -31,6 +36,7 @@
 						firstName: firstName,
 						lastName: lastName,
 						id: user.uid,
+						idProfile: generateId,
 						avatar: 'https://cdn-icons-png.flaticon.com/512/149/149995.png',
 						description: ''
 					});

@@ -9,7 +9,7 @@
 	let urlImg: string = '';
 
 	//id
-	const generateId = Math.floor((1 + Math.random()) * 0x10000)
+	const generateId = Math.floor((1 + Math.random()) * 0x100000)
 		.toString(16)
 		.substring(1);
 

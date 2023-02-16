@@ -3,6 +3,7 @@
 	import Signup from '$lib/login/Signup.svelte';
 
 	let signInOrSignUp = false;
+	
 </script>
 
 <main>

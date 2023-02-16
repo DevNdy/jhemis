@@ -17,7 +17,12 @@
 			{#each $usersList as item}
 				{#if item.id === idUser}
 					<img src={item.avatar} alt="avatar" />
-					<p>{item.firstName + ' ' + item.lastName} <span>{date}</span></p>
+					<div class="userName">
+						<a href={`/home/${item.idProfile + item.firstName}`}
+							>{item.firstName + ' ' + item.lastName}
+						</a>
+						<p>{date}</p>
+					</div>
 				{/if}
 			{/each}
 		</div>
@@ -61,14 +66,20 @@
 				border-radius: 50%;
 			}
 
-			p {
+			.userName {
 				margin-left: 10px;
 				display: flex;
 				flex-direction: column;
-				text-transform: capitalize;
-				font-weight: 700;
 
-				span {
+				a {
+					text-decoration: none;
+					display: flex;
+					flex-direction: column;
+					text-transform: capitalize;
+					font-weight: 700;
+				}
+				p {
+					font-style: italic;
 					color: rgb(163, 163, 163);
 					font-size: 13px;
 				}
