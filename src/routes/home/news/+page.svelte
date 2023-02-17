@@ -1,8 +1,10 @@
 <script lang="ts">
+	import Loader from '$lib/ui-reusable/Loader.svelte';
 	import { onMount } from 'svelte';
 
 	let newsData: any = [];
 	let indexNbr: number = 6;
+	let loading: boolean = false;
 
 	const getApiNews = async () => {
 		const res = await fetch(
@@ -14,8 +16,10 @@
 	};
 
 	onMount(async () => {
+		loading = true;
 		newsData = await getApiNews();
 		console.log(newsData);
+		loading = false;
 	});
 </script>
 
@@ -39,9 +43,14 @@
 				{/if}
 			{/each}
 			<div class="divBtn">
-				<button class="btnMoreData" on:click={() => (indexNbr = indexNbr + 5)}>charger plus</button>
+				<button class="btnMoreData" on:click={() => (indexNbr = indexNbr + 5)}>+ d'articles</button>
 			</div>
 		</div>
+		{#if loading}
+			<div class="load">
+				<Loader />
+			</div>
+		{/if}
 	</section>
 </main>
 
@@ -143,5 +152,18 @@
 				opacity: 0.8;
 			}
 		}
+	}
+
+	.load {
+		position: fixed;
+		top: 0;
+		left: 233px;
+		bottom: 0;
+		right: 0;
+		background-color: white;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

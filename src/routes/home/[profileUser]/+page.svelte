@@ -1,4 +1,5 @@
 <script>
+	import SendMessage from '$lib/profile/user/SendMessage.svelte';
 	import { usersList, postsList } from '../../../stores/dataUsers';
 
 	export let data;
@@ -16,6 +17,7 @@
 						<h3>Membre depuis le {item.date}</h3>
 						<p><span>Description :</span> {item.description}</p>
 						<button><i class="fa-solid fa-paper-plane" />message</button>
+						<SendMessage userName={item.firstName} />
 					</div>
 				</div>
 				<h4>Les posts de {item.firstName} :</h4>
