@@ -9,3 +9,18 @@
 ul {
 	padding: 0;
 }
+
+button {
+	background-color: #373435;
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+input:focus {
+	outline-color: #bf9b58;
+}

@@ -142,15 +142,7 @@
 			height: 30px;
 			width: 100px;
 			margin: 20px;
-			background-color: #373435;
-			color: white;
 			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-
-			&:hover {
-				opacity: 0.8;
-			}
 		}
 	}
 

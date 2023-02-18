@@ -104,15 +104,7 @@
 				margin-top: 40px;
 				padding: 3px 15px 3px 15px;
 				font-size: 16px;
-				background-color: #373435;
-				color: white;
 				border: none;
-				border-radius: 5px;
-				cursor: pointer;
-
-				&:hover {
-					opacity: 0.8;
-				}
 
 				i {
 					margin-right: 15px;

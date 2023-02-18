@@ -135,4 +135,14 @@
 			margin-top: 5px;
 		}
 	}
+
+	@media (max-width: 1300px) {
+		.post {
+			width: 500px;
+		}
+
+		.imgPost {
+			width: 500px;
+		}
+	}
 </style>

@@ -138,10 +138,6 @@
 		padding-left: 5px;
 		border-radius: 8px;
 		border: 0.5px solid gray;
-
-		&:focus {
-			outline-color: #bf9b58;
-		}
 	}
 
 	.btn {
@@ -152,16 +148,9 @@
 			width: 100px;
 			margin: 10px;
 			padding: 3px 10px 3px 10px;
-			background-color: #373435;
-			color: white;
 			font-size: 15px;
 			border: none;
 			border-radius: 5px;
-			cursor: pointer;
-
-			&:hover {
-				opacity: 0.8;
-			}
 		}
 	}
 </style>
