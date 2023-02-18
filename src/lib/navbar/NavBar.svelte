@@ -3,7 +3,14 @@
 	import { signOut } from 'firebase/auth';
 	import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 	import { auth, db } from '../../routes/fb';
-	import { authStore, usersList, userName, postsList, messagesList } from '../../stores/dataUsers';
+	import {
+		authStore,
+		usersList,
+		userName,
+		postsList,
+		messagesList,
+		usersMessagesList
+	} from '../../stores/dataUsers';
 
 	let users: any = [];
 
@@ -48,6 +55,17 @@
 			let todo = { ...doc.data(), id: doc.id };
 			fbTodos = [todo, ...fbTodos];
 			messagesList.set(fbTodos);
+		});
+	});
+
+	const colRefUsersMessage: any = query(collection(db, 'UsersMessage'), orderBy('time', 'asc'));
+
+	const getUserMess = onSnapshot(colRefUsersMessage, (querySnapshot: any) => {
+		let fbTodos: any = [];
+		querySnapshot.forEach((doc: any) => {
+			let todo = { ...doc.data(), id: doc.id };
+			fbTodos = [todo, ...fbTodos];
+			usersMessagesList.set(fbTodos);
 		});
 	});
 

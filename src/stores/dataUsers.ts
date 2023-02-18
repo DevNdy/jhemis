@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 export let usersList: any = writable([]);
 export let postsList: any = writable([]);
 export let messagesList: any = writable([]);
+export let usersMessagesList: any = writable([]);
 export let authStore = writable({
 	email: 'null',
 	uid: 'null'

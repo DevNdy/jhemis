@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SendMessage from '$lib/profile/user/SendMessage.svelte';
-	import { addDoc, collection } from 'firebase/firestore';
+	import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 	import { usersList, postsList, authStore, dateOfDay, userName } from '../../../stores/dataUsers';
 	import { db } from '../../fb';
 
@@ -17,6 +17,15 @@
 				time: Date.now(),
 				date: dateOfDay,
 				message: message,
+				userName: $userName.name,
+				avatarSend: $userName.avatar
+			});
+			await setDoc(doc(db, 'UsersMessage', $authStore.uid + id), {
+				idSend: $authStore.uid,
+				idReceive: id,
+				time: Date.now(),
+				date: dateOfDay,
+				lastMessage: message,
 				userName: $userName.name,
 				avatarSend: $userName.avatar
 			});

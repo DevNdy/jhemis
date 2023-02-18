@@ -15,6 +15,9 @@
 	</div>
 	<div class="center">
 		{#each $messagesList as item}
+			{#if item.date !== item.date}
+				<h4>{item.date}</h4>
+			{/if}
 			{#if item.idSend === $authStore.uid && item.idReceive === idUserReceive}
 				<div class="send">
 					<p>{item.message}</p>
