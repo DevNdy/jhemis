@@ -1,14 +1,42 @@
 <script lang="ts">
-	import { authStore, messagesList } from '../../../stores/dataUsers';
+	import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+	import { db } from '../../../routes/fb';
+	import { authStore, dateOfDay, messagesList, userName } from '../../../stores/dataUsers';
 
 	export let userNameProfile: string;
 	export let onClickClose: () => void;
-	export let onSubmitMessage: () => void;
-	export let message: string;
 	export let idUserReceive: string;
+
+	let message = '';
+
+	const onSubmitMessage = async (id: string) => {
+		try {
+			await addDoc(collection(db, 'Messages'), {
+				idSend: $authStore.uid,
+				idReceive: id,
+				time: Date.now(),
+				date: dateOfDay,
+				message: message,
+				userName: $userName.name,
+				avatarSend: $userName.avatar
+			});
+			await setDoc(doc(db, 'UsersMessage', $authStore.uid + id), {
+				idSend: $authStore.uid,
+				idReceive: id,
+				time: Date.now(),
+				date: dateOfDay,
+				lastMessage: message,
+				userName: $userName.name,
+				avatarSend: $userName.avatar
+			});
+			message = '';
+		} catch (err) {
+			console.log(err);
+		}
+	};
 </script>
 
-<form on:submit|preventDefault={onSubmitMessage}>
+<form on:submit|preventDefault={() => onSubmitMessage(idUserReceive)}>
 	<div class="top">
 		<h3>{userNameProfile}</h3>
 		<i on:click={onClickClose} on:keypress class="fa-solid fa-xmark" />

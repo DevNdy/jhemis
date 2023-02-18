@@ -1,14 +1,29 @@
-<script>
-	import { authStore, dateOfDay, messagesList, usersMessagesList } from '../../../stores/dataUsers';
+<script lang="ts">
+	import SendMessage from '$lib/profile/user/SendMessage.svelte';
+	import {
+		authStore,
+		dateOfDay,
+		messagesList,
+		userName,
+		usersMessagesList
+	} from '../../../stores/dataUsers';
+
+	let openChatMessage: boolean = false;
+	let userNameSelect: string = '';
+
+	const onClickUserMessage = (userName: string) => {
+		openChatMessage = true;
+		userNameSelect = userName;
+	};
 </script>
 
 <main>
 	<section>
 		<h2>Messages</h2>
 		<div class="listMess">
-			{#each $usersMessagesList as item, index}
+			{#each $usersMessagesList as item}
 				{#if item.idSend !== $authStore.uid && item.idReceive === $authStore.uid}
-					<div class="divElements">
+					<div class="divElements" on:click={() => onClickUserMessage(item.userName)} on:keypress>
 						<i class="fa-solid fa-trash" />
 						<img src={item.avatarSend} alt="avatar" />
 						<div class="mess">
@@ -16,6 +31,13 @@
 							<p>{item.lastMessage.substr(0, 50)}...</p>
 						</div>
 					</div>
+					{#if openChatMessage === true && item.userName === userNameSelect}
+						<SendMessage
+							userNameProfile={item.userName}
+							onClickClose={() => (openChatMessage = false)}
+							idUserReceive={item.idSend}
+						/>
+					{/if}
 				{/if}
 			{/each}
 		</div>

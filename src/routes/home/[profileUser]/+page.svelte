@@ -1,39 +1,10 @@
 <script lang="ts">
 	import SendMessage from '$lib/profile/user/SendMessage.svelte';
-	import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
-	import { usersList, postsList, authStore, dateOfDay, userName } from '../../../stores/dataUsers';
-	import { db } from '../../fb';
+	import { usersList, postsList, authStore } from '../../../stores/dataUsers';
 
 	export let data;
 	const { product } = data;
 	let openChatMessage = false;
-	let message = '';
-
-	const onSubmitMessage = async (id: string) => {
-		try {
-			await addDoc(collection(db, 'Messages'), {
-				idSend: $authStore.uid,
-				idReceive: id,
-				time: Date.now(),
-				date: dateOfDay,
-				message: message,
-				userName: $userName.name,
-				avatarSend: $userName.avatar
-			});
-			await setDoc(doc(db, 'UsersMessage', $authStore.uid + id), {
-				idSend: $authStore.uid,
-				idReceive: id,
-				time: Date.now(),
-				date: dateOfDay,
-				lastMessage: message,
-				userName: $userName.name,
-				avatarSend: $userName.avatar
-			});
-			message = '';
-		} catch (err) {
-			console.log(err);
-		}
-	};
 </script>
 
 <main>
@@ -55,8 +26,6 @@
 							<SendMessage
 								userNameProfile={item.firstName}
 								onClickClose={() => (openChatMessage = false)}
-								onSubmitMessage={() => onSubmitMessage(item.id)}
-								bind:message
 								idUserReceive={item.id}
 							/>
 						{/if}
