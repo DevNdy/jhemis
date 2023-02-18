@@ -1,21 +1,12 @@
 <script lang="ts">
 	import { doc, setDoc } from 'firebase/firestore';
 	import { db } from '../../routes/fb';
-	import { authStore, usersList, userName } from '../../stores/dataUsers';
+	import { authStore, usersList, userName, dateOfDay, generateId } from '../../stores/dataUsers';
 
 	export let onClickCloseWindow: () => void;
 
 	let description: string = '';
 	let urlImg: string = '';
-
-	//id
-	const generateId = Math.floor((1 + Math.random()) * 0x100000)
-		.toString(16)
-		.substring(1);
-
-	const date = new Date();
-	const options: {} = { weekday: 'short', year: '2-digit', month: 'short', day: '2-digit' };
-	const dateOfDay = date.toLocaleDateString('fr-FR', options);
 
 	const submitPost = async () => {
 		try {

@@ -3,7 +3,14 @@
 	import { signOut } from 'firebase/auth';
 	import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 	import { auth, db } from '../../routes/fb';
-	import { authStore, usersList, userName, postsList } from '../../stores/dataUsers';
+	import {
+		authStore,
+		usersList,
+		userName,
+		postsList,
+		messagesList,
+		usersMessagesList
+	} from '../../stores/dataUsers';
 
 	let users: any = [];
 
@@ -40,6 +47,28 @@
 		});
 	});
 
+	const colRefMess: any = query(collection(db, 'Messages'), orderBy('time', 'asc'));
+
+	const getMessages = onSnapshot(colRefMess, (querySnapshot: any) => {
+		let fbTodos: any = [];
+		querySnapshot.forEach((doc: any) => {
+			let todo = { ...doc.data(), id: doc.id };
+			fbTodos = [todo, ...fbTodos];
+			messagesList.set(fbTodos);
+		});
+	});
+
+	const colRefUsersMessage: any = query(collection(db, 'UsersMessage'), orderBy('time', 'asc'));
+
+	const getUserMess = onSnapshot(colRefUsersMessage, (querySnapshot: any) => {
+		let fbTodos: any = [];
+		querySnapshot.forEach((doc: any) => {
+			let todo = { ...doc.data(), id: doc.id };
+			fbTodos = [todo, ...fbTodos];
+			usersMessagesList.set(fbTodos);
+		});
+	});
+
 	const signOutUser = () => {
 		signOut(auth)
 			.then(() => {
@@ -66,8 +95,13 @@
 
 	<ul>
 		<li><a href="/home"><i class="fa-solid fa-house" />Accueil</a></li>
-		<li><a href="/home"><i class="fa-solid fa-globe" />News</a></li>
-		<li><a href="/home"><i class="fa-solid fa-message" />Messages</a></li>
+		<li><a href="/home/news"><i class="fa-solid fa-globe" />News</a></li>
+		<li>
+			<a href="/home/message"
+				><i class="fa-solid fa-message" />
+				Messages
+			</a>
+		</li>
 		<li><a href="/home/profile"><i class="fa-solid fa-circle-user" />Mon compte</a></li>
 	</ul>
 

@@ -1,8 +1,10 @@
-<script>
-	import { usersList, postsList } from '../../../stores/dataUsers';
+<script lang="ts">
+	import SendMessage from '$lib/profile/user/SendMessage.svelte';
+	import { usersList, postsList, authStore } from '../../../stores/dataUsers';
 
 	export let data;
 	const { product } = data;
+	let openChatMessage = false;
 </script>
 
 <main>
@@ -15,7 +17,18 @@
 					<div class="infosRight">
 						<h3>Membre depuis le {item.date}</h3>
 						<p><span>Description :</span> {item.description}</p>
-						<button><i class="fa-solid fa-paper-plane" />message</button>
+						{#if $authStore.uid !== item.id}
+							<button on:click={() => (openChatMessage = true)}
+								><i class="fa-solid fa-paper-plane" />message</button
+							>
+						{/if}
+						{#if openChatMessage === true}
+							<SendMessage
+								userNameProfile={item.firstName}
+								onClickClose={() => (openChatMessage = false)}
+								idUserReceive={item.id}
+							/>
+						{/if}
 					</div>
 				</div>
 				<h4>Les posts de {item.firstName} :</h4>
