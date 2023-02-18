@@ -129,4 +129,26 @@
 			}
 		}
 	}
+
+	@media (max-width: 750px) {
+		main {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		section {
+			margin: 50px 0 0 0;
+			width: 360px;
+		}
+
+		div {
+			h2 {
+				margin-left: 30px;
+			}
+			button {
+				margin-right: 10px;
+				position: static;
+			}
+		}
+	}
 </style>

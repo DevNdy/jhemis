@@ -83,7 +83,11 @@
 	<div>
 		<img src="/logoSimple.png" alt="logo" />
 		<h2><span>J</span>hémis</h2>
-		<i on:click={() => (openHeader = !openHeader)} on:keypress class="fa-solid fa-chevron-right" />
+		<i
+			on:click={() => (openHeader = !openHeader)}
+			on:keypress
+			class={`${openHeader ? 'fa-solid fa-chevron-left' : 'fa-solid fa-chevron-right'}`}
+		/>
 	</div>
 
 	{#each $usersList as item}
@@ -239,17 +243,21 @@
 	@media (max-width: 930px) {
 		header {
 			position: absolute;
-			left: -200px;
+			left: -210px;
 			transition: 1s;
 			box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 			border: none;
 		}
 
 		div {
+			margin-top: 0px;
 			i {
 				opacity: 1;
 				z-index: 5;
 				cursor: pointer;
+				&:hover {
+					opacity: 0.8;
+				}
 			}
 		}
 	}

@@ -145,4 +145,14 @@
 			width: 500px;
 		}
 	}
+
+	@media (max-width: 750px) {
+		.post {
+			width: 310px;
+		}
+
+		.imgPost {
+			width: 310px;
+		}
+	}
 </style>
