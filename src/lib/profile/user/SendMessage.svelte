@@ -1,15 +1,34 @@
 <script lang="ts">
-	export let userName: string;
+	import { authStore, messagesList } from '../../../stores/dataUsers';
+
+	export let userNameProfile: string;
+	export let onClickClose: () => void;
+	export let onSubmitMessage: () => void;
+	export let message: string;
+	export let idUserReceive: string;
 </script>
 
-<form>
+<form on:submit|preventDefault={onSubmitMessage}>
 	<div class="top">
-		<h3>{userName}</h3>
-		<i class="fa-solid fa-xmark" />
+		<h3>{userNameProfile}</h3>
+		<i on:click={onClickClose} on:keypress class="fa-solid fa-xmark" />
 	</div>
-	<div class="center">hello</div>
+	<div class="center">
+		{#each $messagesList as item}
+			{#if item.idSend === $authStore.uid && item.idReceive === idUserReceive}
+				<div class="send">
+					<p>{item.message}</p>
+				</div>
+			{/if}
+			{#if item.idReceive === $authStore.uid && item.idSend === idUserReceive}
+				<div class="receive">
+					<p>{item.message}</p>
+				</div>
+			{/if}
+		{/each}
+	</div>
 	<div class="bottom">
-		<input type="text" placeholder="envoyer un message..." />
+		<input type="text" placeholder="envoyer un message..." bind:value={message} />
 		<button><i class="fa-solid fa-paper-plane" /></button>
 	</div>
 </form>
@@ -32,7 +51,7 @@
 	}
 
 	.top {
-		height: 40px;
+		height: 50px;
 		background-color: white;
 		width: 380px;
 		display: flex;
@@ -41,6 +60,7 @@
 		box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 		border-top-left-radius: 8px;
 		border-top-right-radius: 8px;
+		z-index: 100;
 
 		h3 {
 			margin-left: 10px;
@@ -69,8 +89,45 @@
 
 	.center {
 		background-color: white;
-		margin: 3px;
+		margin: 5px 3px 3px 3px;
 		height: 100%;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+		transform: rotate(180deg);
+
+		.send {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-end;
+			transform: rotate(180deg);
+			p {
+				max-width: 200px;
+				padding: 5px 10px 5px 10px;
+				border-radius: 12px;
+				margin: 5px;
+				background-color: #373435;
+				color: white;
+			}
+		}
+
+		.receive {
+			transform: rotate(180deg);
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			p {
+				max-width: 200px;
+				padding: 5px 10px 5px 10px;
+				border-radius: 12px;
+				margin: 5px;
+				background-color: #aa7f2e;
+				color: white;
+			}
+		}
 	}
 
 	.bottom {
@@ -79,7 +136,7 @@
 
 		input {
 			height: 40px;
-			width: 340px;
+			width: 332px;
 			border: 0.5px solid gray;
 			padding-left: 5px;
 
