@@ -1,12 +1,8 @@
 <script lang="ts">
 	import SendMessage from '$lib/profile/user/SendMessage.svelte';
-	import {
-		authStore,
-		dateOfDay,
-		messagesList,
-		userName,
-		usersMessagesList
-	} from '../../../stores/dataUsers';
+	import { deleteDoc, doc } from 'firebase/firestore';
+	import { authStore, usersMessagesList } from '../../../stores/dataUsers';
+	import { db } from '../../fb';
 
 	let openChatMessage: boolean = false;
 	let userNameSelect: string = '';
@@ -14,6 +10,15 @@
 	const onClickUserMessage = (userName: string) => {
 		openChatMessage = true;
 		userNameSelect = userName;
+	};
+
+	const deleteMessage = async (id: string) => {
+		try {
+			await deleteDoc(doc(db, 'UsersMessage', id));
+			openChatMessage = false;
+		} catch (err) {
+			console.log(err);
+		}
 	};
 </script>
 
@@ -24,7 +29,11 @@
 			{#each $usersMessagesList as item}
 				{#if item.idSend !== $authStore.uid && item.idReceive === $authStore.uid}
 					<div class="divElements" on:click={() => onClickUserMessage(item.userName)} on:keypress>
-						<i class="fa-solid fa-trash" />
+						<i
+							on:click={() => deleteMessage(item.idSend + item.idReceive)}
+							on:keypress
+							class="fa-solid fa-trash"
+						/>
 						<img src={item.avatarSend} alt="avatar" />
 						<div class="mess">
 							<h3><span>de:</span> {item.userName} <span>le </span>{item.date}</h3>
