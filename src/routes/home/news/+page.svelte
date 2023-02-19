@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Loader from '$lib/ui-reusable/Loader.svelte';
 	import { onMount } from 'svelte';
 
@@ -7,12 +8,17 @@
 	let loading: boolean = false;
 
 	const getApiNews = async () => {
-		const res = await fetch(
-			'https://newsapi.org/v2/top-headlines?country=fr&category=business&apiKey=df29903951f8497fb88520ada1b3a549'
-		);
-		const data = await res.json();
+		try {
+			const res = await fetch(
+				'https://newsapi.org/v2/top-headlines?country=fr&category=business&apiKey=df29903951f8497fb88520ada1b3a549'
+			);
+			const data = await res.json();
 
-		return data.articles;
+			return data.articles;
+		} catch (err) {
+			console.log(err);
+			goto('/home');
+		}
 	};
 
 	onMount(async () => {
