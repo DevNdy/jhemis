@@ -2,7 +2,7 @@
 	import Signin from '$lib/login/Signin.svelte';
 	import Signup from '$lib/login/Signup.svelte';
 
-	let signInOrSignUp = false;
+	let signInOrSignUp: boolean = false;
 </script>
 
 <main>

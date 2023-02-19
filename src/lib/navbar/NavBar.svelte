@@ -12,7 +12,7 @@
 		usersMessagesList
 	} from '../../stores/dataUsers';
 
-	let users: any = [];
+	let users: string[] = [];
 	let openHeader: boolean = false;
 
 	const colRefUser: any = query(collection(db, 'Users'));
@@ -40,7 +40,7 @@
 	const colRef: any = query(collection(db, 'Posts'), orderBy('time', 'asc'));
 
 	const getPosts = onSnapshot(colRef, (querySnapshot: any) => {
-		let fbTodos: any = [];
+		let fbTodos: string[] = [];
 		querySnapshot.forEach((doc: any) => {
 			let todo = { ...doc.data(), id: doc.id };
 			fbTodos = [todo, ...fbTodos];
@@ -51,7 +51,7 @@
 	const colRefMess: any = query(collection(db, 'Messages'), orderBy('time', 'asc'));
 
 	const getMessages = onSnapshot(colRefMess, (querySnapshot: any) => {
-		let fbTodos: any = [];
+		let fbTodos: string[] = [];
 		querySnapshot.forEach((doc: any) => {
 			let todo = { ...doc.data(), id: doc.id };
 			fbTodos = [todo, ...fbTodos];
@@ -62,7 +62,7 @@
 	const colRefUsersMessage: any = query(collection(db, 'UsersMessage'), orderBy('time', 'asc'));
 
 	const getUserMess = onSnapshot(colRefUsersMessage, (querySnapshot: any) => {
-		let fbTodos: any = [];
+		let fbTodos: string[] = [];
 		querySnapshot.forEach((doc: any) => {
 			let todo = { ...doc.data(), id: doc.id };
 			fbTodos = [todo, ...fbTodos];

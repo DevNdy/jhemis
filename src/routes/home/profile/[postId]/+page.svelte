@@ -7,8 +7,8 @@
 	const { product } = data;
 
 	let editPost: boolean = false;
-	let urlImg = '';
-	let description = '';
+	let urlImg: string = '';
+	let description: string = '';
 
 	const onClickDeletePost = async (id: string) => {
 		await deleteDoc(doc(db, 'Posts', id));

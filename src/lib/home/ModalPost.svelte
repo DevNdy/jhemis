@@ -7,7 +7,7 @@
 	export let idUser: string;
 	export let nbrLike: number;
 	export let onClickLike: () => void;
-	export let like: any;
+	export let like: boolean;
 	export let onClickDelete: () => void;
 </script>
 

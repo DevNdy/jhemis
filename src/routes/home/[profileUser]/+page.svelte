@@ -4,7 +4,7 @@
 
 	export let data;
 	const { product } = data;
-	let openChatMessage = false;
+	let openChatMessage: boolean = false;
 </script>
 
 <main>

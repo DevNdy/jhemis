@@ -6,7 +6,7 @@
 	import { auth } from './fb';
 	import { authStore } from '../stores/dataUsers';
 
-	let loading = false;
+	let loading: boolean = false;
 
 	onMount(() => {
 		loading = true;
