@@ -194,4 +194,24 @@
 			}
 		}
 	}
+
+	@media (max-width: 500px) {
+		form {
+			width: 100%;
+			right: 0px;
+			left: 0px;
+		}
+
+		.top {
+			width: 100%;
+		}
+
+		.center {
+			.receive {
+				p {
+					margin: 8px;
+				}
+			}
+		}
+	}
 </style>

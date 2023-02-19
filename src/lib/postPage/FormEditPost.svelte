@@ -38,20 +38,12 @@
 			border: #373435 0.5px solid;
 		}
 
-		input:focus {
-			outline-color: #bf9b58;
-		}
-
 		textarea {
 			margin-top: 5px;
 			width: 400px;
 			border-radius: 5px;
 			border: #373435 0.5px solid;
 			padding: 5px;
-		}
-
-		textarea:focus {
-			outline-color: #bf9b58;
 		}
 
 		div {
@@ -70,6 +62,27 @@
 				&:hover {
 					opacity: 0.8;
 				}
+			}
+		}
+	}
+
+	@media (max-width: 1080px) {
+		form {
+			margin-left: 0px;
+		}
+	}
+
+	@media (max-width: 550px) {
+		form {
+			width: 310px;
+			margin-bottom: 20px;
+
+			input {
+				width: 303px;
+			}
+
+			textarea {
+				width: 300px;
 			}
 		}
 	}

@@ -68,7 +68,7 @@
 
 <style lang="scss">
 	main {
-		height: 100vh;
+		min-height: 100vh;
 		width: 1000;
 		display: flex;
 		flex-direction: column;
@@ -135,6 +135,48 @@
 		span {
 			text-decoration: underline;
 			font-weight: 500;
+		}
+	}
+
+	@media (max-width: 1400px) {
+		section {
+			background-color: red;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	@media (max-width: 1300px) {
+	}
+
+	@media (max-width: 1080px) {
+		section {
+			background-color: blue;
+		}
+
+		img {
+			max-width: 400px;
+		}
+
+		p {
+			width: 400px;
+		}
+	}
+
+	@media (max-width: 930px) {
+		section {
+			margin-left: 0px;
+			background-color: white;
+		}
+	}
+
+	@media (max-width: 550px) {
+		img {
+			max-width: 320px;
+		}
+
+		p {
+			width: 320px;
 		}
 	}
 </style>
