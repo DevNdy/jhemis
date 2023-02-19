@@ -14,6 +14,7 @@
 		{:else}
 			<Signin on:click={() => (signInOrSignUp = true)} />
 		{/if}
+
 		<p class="bottom">© 2023 Jhémis par @DevNdy</p>
 		<img class="logo" src="./logoSimple.png" alt="jhémis" />
 	</div>
@@ -24,7 +25,7 @@
 	/>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		display: flex;
 		flex-direction: row;

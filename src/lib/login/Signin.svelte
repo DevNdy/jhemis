@@ -33,9 +33,10 @@
 	<button>Se connecter</button>
 	<h5>{messError}</h5>
 	<p>Pas encore inscrit? <span on:click on:keypress>Créer un compte</span></p>
+	<h6>Modèle: <span>kevin@gmail.com</span> <span>azerty</span></h6>
 </form>
 
-<style>
+<style lang="scss">
 	form {
 		margin-top: 140px;
 		display: flex;
@@ -91,6 +92,23 @@
 		color: #bf9b58;
 		cursor: pointer;
 		text-decoration: underline;
+	}
+
+	h6 {
+		margin: 15px 0 0 90px;
+		display: flex;
+		flex-direction: column;
+		font-size: 14px;
+		border: 0.5px solid #373435;
+		padding: 8px;
+		border-radius: 5px;
+		span {
+			cursor: default;
+			font-size: 14px;
+			color: rgb(95, 95, 95);
+			text-decoration: none;
+			font-weight: 400;
+		}
 	}
 
 	@media (max-width: 600px) {

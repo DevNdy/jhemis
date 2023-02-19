@@ -262,7 +262,7 @@
 		}
 
 		button {
-			margin-bottom: 50px;
+			margin-bottom: 55px;
 		}
 	}
 </style>
