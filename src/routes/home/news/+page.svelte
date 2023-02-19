@@ -157,6 +157,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		z-index: 3;
 	}
 
 	@media (max-width: 1400px) {

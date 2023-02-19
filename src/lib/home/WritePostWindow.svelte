@@ -162,6 +162,7 @@
 
 	@media (max-width: 750px) {
 		.window {
+			border: 1px solid black;
 			left: 8%;
 			width: 400px;
 		}

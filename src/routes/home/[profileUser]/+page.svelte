@@ -197,6 +197,10 @@
 			width: 350px;
 		}
 
+		h2 {
+			margin: 15px 15px 0 0;
+		}
+
 		.infos {
 			margin-top: 70px;
 

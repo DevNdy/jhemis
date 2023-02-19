@@ -197,6 +197,7 @@
 
 	@media (max-width: 500px) {
 		form {
+			position: fixed;
 			width: 100%;
 			right: 0px;
 			left: 0px;

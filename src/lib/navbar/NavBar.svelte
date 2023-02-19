@@ -242,11 +242,12 @@
 
 	@media (max-width: 930px) {
 		header {
-			position: absolute;
+			position: fixed;
 			left: -210px;
 			transition: 1s;
 			box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 			border: none;
+			z-index: 50;
 		}
 
 		div {
