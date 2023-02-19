@@ -56,7 +56,7 @@
 
 <style lang="scss">
 	main {
-		height: 100vh;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -65,7 +65,7 @@
 	section {
 		width: 1100px;
 		margin: 35px 0 0 200px;
-		height: 100vh;
+		min-height: 100vh;
 	}
 
 	.news {
@@ -157,5 +157,129 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+	}
+
+	@media (max-width: 1400px) {
+		section {
+			width: 900px;
+		}
+
+		.article {
+			img {
+				height: 250px;
+			}
+			.description {
+				h3 {
+					width: 400px;
+					font-size: 15px;
+				}
+
+				p {
+					font-size: 14px;
+					width: 400px;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1200px) {
+		section {
+			width: 800px;
+		}
+
+		.article {
+			img {
+				height: 250px;
+			}
+			.description {
+				margin-left: 25px;
+				h3 {
+					width: 400px;
+					font-size: 15px;
+					font-weight: 500;
+					color: black;
+				}
+
+				p {
+					font-size: 14px;
+					width: 400px;
+					color: rgb(60, 60, 60);
+					font-weight: 300;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1080px) {
+		section {
+			margin-left: 100px;
+			width: 400px;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		.article {
+			flex-direction: column;
+			max-width: 350px;
+			img {
+				height: 270px;
+				width: 350px;
+				max-width: 350px;
+			}
+			.description {
+				height: 300px;
+				margin-left: 0px;
+				align-items: center;
+				h3 {
+					width: 320px;
+				}
+
+				p {
+					margin-top: 10px;
+					width: 300px;
+					text-align: center;
+				}
+				div {
+					width: 320px;
+					margin-bottom: 5px;
+					h5 {
+						margin-left: 5px;
+						font-size: 12px;
+					}
+
+					a {
+						font-size: 10px;
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: 750px) {
+		section {
+			margin: 10px 0 0 0;
+			width: 360px;
+		}
+
+		h2 {
+			text-align: end;
+			margin: 8px 15px 10px 0;
+		}
+
+		.article {
+			margin-top: 5px;
+			flex-direction: column;
+			max-width: 350px;
+			img {
+				height: 250px;
+				width: 320px;
+			}
+		}
+	}
+
+	.load {
+		left: 0;
 	}
 </style>

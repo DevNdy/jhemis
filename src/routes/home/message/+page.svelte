@@ -55,16 +55,15 @@
 
 <style lang="scss">
 	main {
-		height: 100vh;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
 	section {
-		width: 1100px;
-		margin: 35px 0 0 200px;
-		height: 100vh;
+		margin: 35px 0 0 0;
+		min-height: 70vh;
 	}
 
 	.listMess {
@@ -116,6 +115,55 @@
 		cursor: pointer;
 		&:hover {
 			color: red;
+		}
+	}
+
+	@media (max-width: 1080px) {
+		.listMess {
+			margin-top: 100px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.divElements {
+			width: 340px;
+			margin: 10px;
+
+			.mess {
+				width: 250px;
+
+				h3 {
+					font-weight: 300;
+					font-size: 13px;
+
+					span {
+						font-weight: 500;
+					}
+				}
+
+				p {
+					max-width: 250px;
+					font-size: 12px;
+				}
+			}
+		}
+
+		i {
+			font-size: 12px;
+		}
+	}
+
+	@media (max-width: 750px) {
+		section {
+			margin: 0;
+		}
+		h2 {
+			margin: 17px 15px 0 0;
+			text-align: end;
+		}
+
+		.listMess {
+			margin-top: 60px;
 		}
 	}
 </style>
