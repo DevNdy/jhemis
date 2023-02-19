@@ -243,7 +243,6 @@
 		header {
 			position: fixed;
 			left: -210px;
-			bottom: 0;
 			transition: 1s;
 			box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 			border: none;
