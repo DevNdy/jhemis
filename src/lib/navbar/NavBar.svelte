@@ -101,7 +101,6 @@
 
 	<ul>
 		<li><a href="/home"><i class="fa-solid fa-house" />Accueil</a></li>
-		<li><a href="/home/news"><i class="fa-solid fa-globe" />News</a></li>
 		<li>
 			<a href="/home/message"
 				><i class="fa-solid fa-message" />
@@ -244,6 +243,7 @@
 		header {
 			position: fixed;
 			left: -210px;
+			bottom: 0;
 			transition: 1s;
 			box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 			border: none;
@@ -263,7 +263,7 @@
 		}
 
 		button {
-			margin-bottom: 30px;
+			margin-bottom: 50px;
 		}
 	}
 </style>
