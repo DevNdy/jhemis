@@ -153,4 +153,25 @@
 			border-radius: 5px;
 		}
 	}
+
+	@media (max-width: 1080px) {
+		.window {
+			left: 15%;
+		}
+	}
+
+	@media (max-width: 750px) {
+		.window {
+			left: 8%;
+			width: 400px;
+		}
+	}
+
+	@media (max-width: 450px) {
+		.window {
+			width: 350px;
+			top: 100px;
+			left: 5px;
+		}
+	}
 </style>

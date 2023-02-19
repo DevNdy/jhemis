@@ -112,4 +112,22 @@
 			}
 		}
 	}
+
+	@media (max-width: 1080px) {
+		div {
+			left: 35%;
+		}
+	}
+
+	@media (max-width: 750px) {
+		div {
+			left: 20%;
+		}
+	}
+
+	@media (max-width: 450px) {
+		div {
+			left: 0;
+		}
+	}
 </style>
