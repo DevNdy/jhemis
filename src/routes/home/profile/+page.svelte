@@ -80,7 +80,7 @@
 
 <style lang="scss">
 	main {
-		height: 100vh;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -89,7 +89,7 @@
 
 	section {
 		margin: 0 0 0 250px;
-		height: 100vh;
+		min-height: 100vh;
 		width: 1200px;
 		display: flex;
 		flex-direction: column;
@@ -110,5 +110,40 @@
 		bottom: 0;
 		background-color: #a3a3a38d;
 		z-index: 20;
+	}
+
+	@media (max-width: 1400px) {
+		section {
+			width: 870px;
+		}
+	}
+
+	@media (max-width: 1200px) {
+		section {
+			width: 650px;
+		}
+	}
+
+	@media (max-width: 1080px) {
+		main {
+			align-items: center;
+		}
+
+		section {
+			width: 500px;
+			margin: 0 0 0 50px;
+		}
+	}
+
+	@media (max-width: 750px) {
+		section {
+			margin: 0;
+			width: 360px;
+		}
+
+		h2 {
+			margin: 15px 15px 0 0;
+			text-align: end;
+		}
 	}
 </style>

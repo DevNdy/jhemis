@@ -56,10 +56,6 @@
 		padding-left: 5px;
 	}
 
-	input:focus {
-		outline-color: #bf9b58;
-	}
-
 	a {
 		width: 300px;
 		text-decoration: none;
@@ -74,15 +70,7 @@
 		width: 308px;
 		margin-top: 12px;
 		border: none;
-		border-radius: 5px;
-		background-color: #373435;
-		color: white;
 		font-size: 16px;
-		cursor: pointer;
-	}
-
-	button:hover {
-		opacity: 0.7;
 	}
 
 	h5 {
@@ -103,5 +91,11 @@
 		color: #bf9b58;
 		cursor: pointer;
 		text-decoration: underline;
+	}
+
+	@media (max-width: 600px) {
+		form {
+			margin-top: 60px;
+		}
 	}
 </style>

@@ -36,4 +36,29 @@
 		cursor: pointer;
 		border-radius: 5px;
 	}
+
+	@media (max-width: 1200px) {
+		div {
+			width: 600px;
+			margin: 20px 0 0 0;
+		}
+		h4 {
+			text-align: center;
+			margin-bottom: 10px;
+		}
+	}
+
+	@media (max-width: 1080px) {
+		div {
+			width: 500px;
+			margin: 20px 0 0 0;
+		}
+	}
+
+	@media (max-width: 750px) {
+		div {
+			width: 340px;
+			margin: 20px 0 0 0;
+		}
+	}
 </style>

@@ -138,10 +138,6 @@
 		padding-left: 5px;
 		border-radius: 8px;
 		border: 0.5px solid gray;
-
-		&:focus {
-			outline-color: #bf9b58;
-		}
 	}
 
 	.btn {
@@ -152,16 +148,30 @@
 			width: 100px;
 			margin: 10px;
 			padding: 3px 10px 3px 10px;
-			background-color: #373435;
-			color: white;
 			font-size: 15px;
 			border: none;
 			border-radius: 5px;
-			cursor: pointer;
+		}
+	}
 
-			&:hover {
-				opacity: 0.8;
-			}
+	@media (max-width: 1080px) {
+		.window {
+			left: 15%;
+		}
+	}
+
+	@media (max-width: 750px) {
+		.window {
+			left: 8%;
+			width: 400px;
+		}
+	}
+
+	@media (max-width: 450px) {
+		.window {
+			width: 350px;
+			top: 100px;
+			left: 5px;
 		}
 	}
 </style>

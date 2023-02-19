@@ -135,4 +135,24 @@
 			margin-top: 5px;
 		}
 	}
+
+	@media (max-width: 1300px) {
+		.post {
+			width: 500px;
+		}
+
+		.imgPost {
+			width: 500px;
+		}
+	}
+
+	@media (max-width: 750px) {
+		.post {
+			width: 310px;
+		}
+
+		.imgPost {
+			width: 310px;
+		}
+	}
 </style>

@@ -88,4 +88,64 @@
 			}
 		}
 	}
+
+	@media (max-width: 1400px) {
+		img {
+			height: 250px;
+			width: 250px;
+			border-radius: 50%;
+			margin-right: 50px;
+		}
+	}
+
+	@media (max-width: 1200px) {
+		section {
+			margin: 100px 0 0 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		img {
+			height: 300px;
+			width: 300px;
+			border-radius: 50%;
+		}
+
+		i {
+			position: absolute;
+			top: 100px;
+			right: 200px;
+		}
+	}
+
+	@media (max-width: 750px) {
+		img {
+			height: 200px;
+			width: 200px;
+			border-radius: 50%;
+			margin: 0;
+		}
+
+		i {
+			position: absolute;
+			top: 70px;
+			right: 20px;
+		}
+
+		div {
+			margin-top: 20px;
+			h3 {
+				font-size: 14px;
+
+				span {
+					font-size: 14px;
+				}
+			}
+
+			p {
+				width: 310px;
+			}
+		}
+	}
 </style>

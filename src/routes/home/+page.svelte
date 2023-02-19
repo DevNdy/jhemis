@@ -84,19 +84,10 @@
 			right: 60px;
 			height: 40px;
 			padding: 3px 10px 3px 10px;
-			background-color: #373435;
 			border: 1px solid #373435;
-			color: white;
-			border-radius: 5px;
-			cursor: pointer;
-
 			i {
 				margin-right: 10px;
 				color: #bf9b58;
-			}
-
-			&:hover {
-				opacity: 0.8;
 			}
 		}
 	}
@@ -109,5 +100,55 @@
 		bottom: 0;
 		background-color: #a3a3a38d;
 		z-index: 10;
+	}
+
+	@media (max-width: 1400px) {
+		main {
+			align-items: flex-end;
+		}
+	}
+
+	@media (max-width: 1300px) {
+		section {
+			width: 900px;
+		}
+	}
+
+	@media (max-width: 1080px) {
+		section {
+			width: 700px;
+		}
+
+		div {
+			h2 {
+				margin-left: 70px;
+			}
+			button {
+				margin-right: 70px;
+				position: static;
+			}
+		}
+	}
+
+	@media (max-width: 750px) {
+		main {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		section {
+			margin: 50px 0 0 0;
+			width: 360px;
+		}
+
+		div {
+			h2 {
+				margin-left: 30px;
+			}
+			button {
+				margin-right: 10px;
+				position: static;
+			}
+		}
 	}
 </style>

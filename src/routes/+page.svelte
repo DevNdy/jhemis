@@ -18,6 +18,7 @@
 		<img class="logo" src="./logoSimple.png" alt="jhémis" />
 	</div>
 	<img
+		class="imgIntro"
 		src="https://images.pexels.com/photos/6077123/pexels-photo-6077123.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 		alt="justice"
 	/>
@@ -62,7 +63,7 @@
 		left: 20px;
 	}
 
-	img {
+	.imgIntro {
 		height: 100vh;
 		filter: grayscale(60%);
 	}
@@ -73,5 +74,33 @@
 		left: 20px;
 		font-size: 14px;
 		color: rgb(108, 108, 108);
+	}
+
+	@media (max-width: 1200px) {
+		.imgIntro {
+			width: 0px;
+			height: 0px;
+			opacity: 0;
+		}
+	}
+
+	@media (max-width: 600px) {
+		h1 {
+			margin-top: 70px;
+			font-size: 28px;
+		}
+
+		p {
+			font-size: 16px;
+		}
+
+		.logo {
+			height: 40px;
+		}
+
+		.bottom {
+			margin-top: 10px;
+			position: static;
+		}
 	}
 </style>

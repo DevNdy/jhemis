@@ -13,6 +13,7 @@
 	} from '../../stores/dataUsers';
 
 	let users: any = [];
+	let openHeader: boolean = false;
 
 	const colRefUser: any = query(collection(db, 'Users'));
 
@@ -78,10 +79,15 @@
 	};
 </script>
 
-<header>
+<header style={`${openHeader ? 'left: 0px' : 'box-shadow: none; background-color: transparent'}`}>
 	<div>
 		<img src="/logoSimple.png" alt="logo" />
 		<h2><span>J</span>hémis</h2>
+		<i
+			on:click={() => (openHeader = !openHeader)}
+			on:keypress
+			class={`${openHeader ? 'fa-solid fa-chevron-left' : 'fa-solid fa-chevron-right'}`}
+		/>
 	</div>
 
 	{#each $usersList as item}
@@ -138,6 +144,17 @@
 		img {
 			margin-left: 12px;
 			height: 50px;
+		}
+
+		i {
+			opacity: 0;
+			z-index: -1;
+			background-color: #bf9b58;
+			padding: 5px;
+			color: white;
+			margin: 10px 0 0 60px;
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
 		}
 	}
 
@@ -215,12 +232,33 @@
 		border: none;
 		font-size: 15px;
 		margin-left: 15px;
-		cursor: pointer;
 		position: absolute;
 		bottom: 0;
 	}
 
 	button:hover {
 		text-decoration: underline;
+	}
+
+	@media (max-width: 930px) {
+		header {
+			position: absolute;
+			left: -210px;
+			transition: 1s;
+			box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+			border: none;
+		}
+
+		div {
+			margin-top: 0px;
+			i {
+				opacity: 1;
+				z-index: 5;
+				cursor: pointer;
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+		}
 	}
 </style>
