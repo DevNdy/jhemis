@@ -183,6 +183,7 @@
 			width: 40px;
 			background-color: #373435;
 			border: none;
+			border-radius: 0;
 			cursor: pointer;
 
 			i {

@@ -33,7 +33,7 @@
 	<button>Se connecter</button>
 	<h5>{messError}</h5>
 	<p>Pas encore inscrit? <span on:click on:keypress>Créer un compte</span></p>
-	<h6>Modèle: <span>kevin@gmail.com</span> <span>azerty</span></h6>
+	<h6>Modèle: <span>test@gmail.com</span> <span>azerty</span></h6>
 </form>
 
 <style lang="scss">

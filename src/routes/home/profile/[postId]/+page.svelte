@@ -78,6 +78,7 @@
 		margin: 100px 0 0 300px;
 		display: flex;
 		flex-direction: row;
+		justify-content: center;
 	}
 
 	h3 {
@@ -140,7 +141,6 @@
 
 	@media (max-width: 1400px) {
 		section {
-			background-color: red;
 			flex-direction: column;
 			align-items: center;
 		}
@@ -150,10 +150,6 @@
 	}
 
 	@media (max-width: 1080px) {
-		section {
-			background-color: blue;
-		}
-
 		img {
 			max-width: 400px;
 		}
